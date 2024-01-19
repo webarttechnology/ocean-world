@@ -70,8 +70,8 @@ body.stellarnav-noscroll-x { overflow-x: hidden; }
 .stellarnav.dark a.dd-toggle .icon-plus:after { border-color: #FFF; }
 
 .stellarnav .icon-close { box-sizing: border-box; width: 12px; height: 12px; position: relative; display: inline-block; }
-.stellarnav .icon-close:before { content: ''; display: block; width: 12px; height: 0px; border-bottom: solid 3px #777; position: absolute; top: 50%; transform: rotate(45deg); }
-.stellarnav .icon-close:after { content: ''; display: block; width: 12px; height: 0px; top: 50%; border-bottom: solid 3px #777; position: absolute; transform: rotate(-45deg); }
+.stellarnav .icon-close:before { content: ''; display: block; width: 20px; height: 0px; border-bottom: solid 3px #fff; position: absolute; top: 50%; transform: rotate(45deg); }
+.stellarnav .icon-close:after { content: ''; display: block; width: 20px; height: 0px; top: 50%; border-bottom: solid 3px #fff; position: absolute; transform: rotate(-45deg); }
 .stellarnav.light .icon-close:before { border-color: #000; }
 .stellarnav.light .icon-close:after { border-color: #000; }
 .stellarnav.dark .icon-close:before { border-color: #FFF; }
@@ -105,8 +105,8 @@ body.stellarnav-noscroll-x { overflow-x: hidden; }
 .stellarnav.mobile.active > ul { display: block; }
 .stellarnav.mobile ul { text-align: left; }
 .stellarnav.mobile > ul > li { display: block; }
-.stellarnav.mobile > ul > li > a { padding: 15px; }
-.stellarnav.mobile ul { background: rgba(221, 221, 221, 1); }
+.stellarnav.mobile > ul > li > a { padding: 15px; color: #FFF; }
+.stellarnav.mobile ul { background: #002E43; }
 .stellarnav.mobile ul ul { position: relative; opacity: 1; visibility: visible; width: auto; display: none; -moz-transition: none; -webkit-transition: none; -o-transition: color 0 ease-in; transition: none; }
 .stellarnav.mobile ul ul ul { left: auto; top: auto; }
 .stellarnav.mobile li.drop-left ul ul { right: auto; }

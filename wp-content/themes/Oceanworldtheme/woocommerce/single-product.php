@@ -22,23 +22,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header( 'shop' ); 
  if(get_field('inner_banner')!=''){
 ?>
-<section class="contact-banner-page" style="background-image: url(<?php echo get_field('product_banner',6103); ?>);">
+<section class="banner-part innerbanner" style="background-image:url(<?php the_field('inner_banner'); ?>);">
 <?php }
 else
 {
 	?>
-<section class="contact-banner-page" style="background-image: url(<?php echo get_field('product_banner',6103); ?>);" >
+	<section class="banner-part innerbanner" style="background-image:url(<?php echo get_stylesheet_directory_uri().'/assets/image/banner.png'; ?>);">
 <?php 	
 
-}
-
-
- ?>
+} ?>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="contact-text text-center">
-                    <h1 data-aos="fade-down" data-aos-duration="1000">Product Details</h1>
+		<div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <div class="banner-text">
+                    <h1><?php the_title(); ?></h1>
+					<?php
+		/**
+		 * woocommerce_before_main_content hook.
+		 *
+		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
+		 * @hooked woocommerce_breadcrumb - 20
+		 */
+		do_action( 'woocommerce_before_main_content' );
+	?>             
                 </div>
             </div>
         </div>
@@ -47,18 +53,17 @@ else
         class="uk-background-page-header-mask-bottom uk-position-absolute uk-position-z-index uk-height-viewport uk-width-1-1">
     </div>
 </section>
- <section class="contact-form-page py-5">
+ <section class="contact-form-page innerContent">
+ <div class="categories-image1">
+        <img src="https://dwstaging.link/cms/ocean-world/wp-content/uploads/2024/01/greenishleaves.png">
+    </div>
+    <div class="categories-image2">
+        <img src="https://dwstaging.link/cms/ocean-world/wp-content/uploads/2024/01/fishes.png">
+    </div>
+
  <div class="container">
 
-	<?php
-		/**
-		 * woocommerce_before_main_content hook.
-		 *
-		 * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-		 * @hooked woocommerce_breadcrumb - 20
-		 */
-		do_action( 'woocommerce_before_main_content' );
-	?>
+	
 
 		<?php while ( have_posts() ) : ?>
 			<?php the_post(); ?>

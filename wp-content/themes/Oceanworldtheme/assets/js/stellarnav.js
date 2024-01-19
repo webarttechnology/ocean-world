@@ -26,7 +26,7 @@
 			locationBtn: '', // adds a location link to the top of menu - i.e.: "/location/", "http://site.com/contact-us/"
 			locationLabel: 'Location', // label for the location button
 			closeBtn: false, // adds a close button to the end of nav
-			closeLabel: 'Close', // label for the close button
+			closeLabel: '', // label for the close button
 			mobileMode: false,
 			scrollbarFix: false // fixes horizontal scrollbar issue on very long navs
 		}, options );

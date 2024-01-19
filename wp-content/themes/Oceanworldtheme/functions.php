@@ -756,27 +756,11 @@ function k99_relative_time() {
 
 
 
-function searchfilter($query) {
-    if ($query->is_search && !is_admin() ) {
-        if(isset($_GET['post_type'])) {
-            $type = $_GET['post_type'];
-                if($type == 'ourservice') {
-                    $query->set('post_type',array('ourservice'));
-                }
-        }       
-    }
-return $query;
-}
-add_filter('pre_get_posts','searchfilter');
-
-
-
-
-function update_price() 
+/*function update_price() 
 {
     $postid = $_POST['formid'];
 
-    $service = $_POST['service'];/* this is servicename */
+    $service = $_POST['service'];
     if($service=='Engine Diagnostic & Repair')
     {
 
@@ -830,7 +814,7 @@ function update_price()
 }
 
 add_action( 'wp_ajax_nopriv_update_price', 'update_price' );
-add_action( 'wp_ajax_update_price', 'update_price' );
+add_action( 'wp_ajax_update_price', 'update_price' ); */
 
 
 
@@ -846,7 +830,7 @@ add_action('init', 'start_session', 1);
 
 
 
-function wpcf7_before_send_mail_function( $contact_form, $abort, $submission ) 
+/*function wpcf7_before_send_mail_function( $contact_form, $abort, $submission ) 
 {
   
  
@@ -860,18 +844,18 @@ function wpcf7_before_send_mail_function( $contact_form, $abort, $submission )
     return $contact_form;
     
 }
-add_filter( 'wpcf7_before_send_mail', 'wpcf7_before_send_mail_function', 10, 3 );
+add_filter( 'wpcf7_before_send_mail', 'wpcf7_before_send_mail_function', 10, 3 );*/
 
 
 
-add_filter( 'nav_menu_link_attributes', 'wpse156165_menu_add_class', 10, 3 );
+/*add_filter( 'nav_menu_link_attributes', 'wpse156165_menu_add_class', 10, 3 );
 
 function wpse156165_menu_add_class( $atts, $item, $args ) {
     $class = 'nav-link header-menu-list'; // or something based on $item
     $atts['class'] = $class;
    
     return $atts;
-}
+}*/
 
 
 
@@ -929,6 +913,8 @@ function add_to_cart_js() {
 
             // Redirect to the cart page when "View Cart" is clicked
             $('body').on('click', '.add-to-cart-button a', function(e) {
+
+                
                 button.html('<a href="<?php echo wc_get_cart_url(); ?>"><i class="fa fa-shopping-cart"></i>View Cart</a>');
                 e.preventDefault();
                 window.location.href = '<?php echo wc_get_cart_url(); ?>';
@@ -957,6 +943,84 @@ function add_to_cart_ajax_handler() {
 add_action('wp_ajax_add_to_cart_action', 'add_to_cart_ajax_handler');
 add_action('wp_ajax_nopriv_add_to_cart_action', 'add_to_cart_ajax_handler');
 
+
+
+
+add_filter('post_class', function($classes, $class, $product_id) {
+    if(is_product_category()) {
+        //only add these classes if we're on a product category page.
+        $classes = array_merge(['prodlist','prodlist1'], $classes);
+    }
+    return $classes;
+},10,3);
+
+
+
+add_filter( 'woocommerce_get_price_html', 'bbloomer_hide_price_addcart_not_logged_in', 9999, 2 );
+ 
+function bbloomer_hide_price_addcart_not_logged_in( $price, $product ) {
+   if ( ! is_user_logged_in() ) { 
+      $price = '<div><a href="' . get_permalink( wc_get_page_id( 'myaccount' ) ) . '" class="loginpricee">' . __( 'View Price', 'bbloomer' ) . '</a></div>';
+      remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+      remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+      add_filter( 'woocommerce_is_purchasable', '__return_false' );
+   }
+   return $price;
+}
+
+
+add_filter('gettext', 'change_ymal');
+
+function change_ymal($translated) 
+{
+	$translated = str_ireplace('You may also like…', 'Related products', $translated);
+	return $translated; 
+}
+
+/*add_filter('loop_shop_columns', 'loop_columns', 999);
+if (!function_exists('loop_columns')) {
+    function loop_columns() {
+        return 3; 
+    }
+}*/
+
+
+add_action( 'woocommerce_single_product_summary', 'dev_designs_show_sku', 5 );
+function dev_designs_show_sku(){
+    global $product;
+  $categoryids = $product->get_category_ids();
+  $termnamearray = array();
+  foreach($categoryids as $eachcatid)
+  {
+    $term = get_term_by('term_id', $eachcatid, 'product_cat'); 
+          $termnamearray[]=$term->name;
+  }
+
+    
+    echo '<div class="product_meta"><span>SKU: ' . $product->get_sku().' Categories: '.implode(",",$termnamearray).'</span></div>';
+}
+
+
+
+
+add_filter( 'get_search_form', 'my_search_form1' );
+
+function my_search_form1( $form ) {
+
+    $form = '
+    <form role="search" method="get" id="searchform" action="'. get_site_url().'/shop" >
+     <div class="shop d-flex">
+      <input type="submit" id="searchsubmit" value="Shop Now" />
+       <div class="relative">
+        <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="Search" required />
+       
+        </div>
+         </div>    
+                   
+    </form>';
+
+    return $form;
+}
 
 
 

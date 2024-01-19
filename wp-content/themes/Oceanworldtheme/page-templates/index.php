@@ -2,7 +2,7 @@
  get_header(); 
 
 $pageid = get_id_by_slug('site-general-settings'); 
-
+$form1='';
  ?>
 
 <!-- banner -->
@@ -13,13 +13,14 @@ $pageid = get_id_by_slug('site-general-settings');
             <div class="col-md-6">
                 <div class="banner-text">
                    <?php echo get_field('home_banner_text'); ?>
-                    <div class="shop d-flex">
-                        <a href="<?php echo get_site_url(); ?>/shop"><?php echo get_field('banner_shop_now_text'); ?></a>
+                   <!-- <div class="shop d-flex"> -->
+                      <!--  <a href="<?php //echo get_site_url(); ?>/shop"><?php //echo get_field('banner_shop_now_text'); ?></a> -->
                         <!--<div class="relative">
                             <input type="text" placeholder="Search">
                             <span class="search"><i class="bi bi-search"></i></span>
                         </div> -->
-                    </div>
+                  <!--  </div>  -->
+                  <?php echo my_search_form1($form1); ?>
                 </div>
             </div>
             <div class="col-md-6">
@@ -201,12 +202,27 @@ $pageid = get_id_by_slug('site-general-settings');
                               ?>
 
                       <div class="col-md-4 col-sm-6">
-                        <div class="sell-box">
+                       <div class="sell-box">
                             <div class="hiddens">
-                                <span class="product_pic"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>"></span>
+								<a href="<?php echo get_the_permalink(); ?>"> <span class="product_pic"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>"></span></a>
                                 <div>
-                                    <span><?php the_title(); ?></span>
+									<a href="<?php echo get_the_permalink(); ?>"> <span><?php the_title(); ?></span></a>
+
+                                    <?php if(is_user_logged_in())
+                                    { ?>
+
                                     <strong>$<?php echo $price = get_post_meta( get_the_ID(), '_regular_price', true); ?></strong>
+                                            <?php
+                                     }
+                                    else
+                                    {
+                                        ?>
+                                        <a href="<?php echo get_site_url(); ?>/my-account" target="_blank"><strong>Login to view price</strong></a>
+                                   <?php
+                                     }
+
+                                     ?>
+
                                     <ul class="test-star-icon d-flex">
                                     <?php for($i=1;$i<=$rating;$i++)
                                     { ?>
@@ -229,12 +245,26 @@ $pageid = get_id_by_slug('site-general-settings');
                                    </ul>
 
                                    <div class="wishlist btn btn-warning"><?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.get_the_ID().']'); ?></div>
+
+                                   <?php if(is_user_logged_in())
+                                   { ?>
+
                                    <div class="cartdiv"><a href="javascript:void(0)" class="add-to-cart-button btn btn-outline-dark" data-toggle="tooltip" data-placement="left" data-product_id="<?php echo get_the_ID();  ?>" data-quantity="<?php echo "1"; ?>" class="fa-solid fa-cart-shopping" aria-label="Search" data-bs-original-title="Search"><i class="bi bi-cart"></i> Add to cart</a></div>
+                               <?php }
+                               else
+                               {
+                                ?>
+                                 <div class="cartdiv"> <a href="<?php echo get_site_url(); ?>/my-account"><strong>Login to add to cart</strong></a></div>
+
+                              <?php 
+                               }
+
+                                ?>
                                    
-                                </div>
+								</div>
                             </div>
                             
-                        </div>
+                        </div> 
                     </div>
                 <?php endwhile;wp_reset_query(); ?>
                               
@@ -424,7 +454,6 @@ $pageid = get_id_by_slug('site-general-settings');
                 <h2><?php echo get_field('say_hello_heading'); ?></h2>
             </div>
             <div class="col-sm-6 helloForm">
-       
                 <?php echo do_shortcode('[contact-form-7 id="2483ae3" title="Home page contact section" html_class="row align-items-center"]'); ?>
             </div>
         </div>

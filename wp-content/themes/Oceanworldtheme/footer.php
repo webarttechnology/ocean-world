@@ -60,11 +60,14 @@
         clickable: true,
       },
       breakpoints: {
+        0: {
+          slidesPerView: 1
+        },
         640: {
           slidesPerView: 2
         },
         768: {
-          slidesPerView: 4
+          slidesPerView: 2
         },
         1024: {
           slidesPerView: 3
@@ -87,11 +90,14 @@
         clickable: true,
       },
       breakpoints: {
-        640: {
+        0: {
+          slidesPerView: 1
+        },
+        575: {
           slidesPerView: 2
         },
         768: {
-          slidesPerView: 4
+          slidesPerView: 3
         },
         1024: {
           slidesPerView: 4
@@ -122,6 +128,14 @@
         el: ".swiper-pagination",
         clickable: true,
       },
+      breakpoints: {
+        0: {
+          slidesPerView: 1
+        },
+        640: {
+          slidesPerView:2
+        },
+      },
     });
   </script>
   <script>
@@ -147,21 +161,123 @@
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
+      breakpoints: {
+        0: {
+          slidesPerView: 1
+        },
+        640: {
+          slidesPerView:2
+        },
+      },
     });
   </script>
 
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/script.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/stellarnav.js"></script>
 <script type="text/javascript">
+  jQuery(document).ready(function ($) 
+       {
+           var isuserlogged = '<?php if(is_user_logged_in()){
+          echo 'logged';
+        }
+        else
+        {
+          echo 'notlogged';
+        }
 
-    jQuery(document).ready(function ($) {
-        jQuery('.stellarnav').stellarNav({
-            breakpoint: 960,
-            position: 'right',
-         });
-    });
+         ?>';
+
+         if(isuserlogged=='logged')
+         {
+
+         }
+         else
+         {
+          
+          $('.wishlist').hide();
+          $('.yith-wcwl-add-to-wishlist').hide();
+         }
+
+      jQuery('.stellarnav').stellarNav({
+          breakpoint: 991,
+          position: 'right',
+      });
+
+      /* Search section starts here  */
+
+$('.keysearchid').hide();
+//jQuery('.keysearchid').css('display','none');
+
+var isprodcat = '<?php if(is_product_category())
+{
+  echo 'yes';
+}
+else
+{
+  echo 'no';
+}
+
+?>';
+if(isprodcat=='yes')
+{
+  //jQuery('.keysearchid').show();
+  jQuery('.keysearchid').css('display','block');
+}
+
+jQuery('#salcatid').change(function(){
+
+// product-category/animals-on-springs/
+var selectedcat = jQuery('#salcatid').val();
+var caturl = '<?php echo get_site_url().'/product-category/'; ?>';
+var finalurl = caturl+selectedcat;
+window.location.href = finalurl;
+jQuery('.keysearchid').show();
+
+});
+
+jQuery('#archivbtn').click(function(e){
+ e.preventDefault();
+ var b = $("#prdnameid").val();
+ if(b!==""){
+ var caturl = '<?php echo get_site_url().'/product-category/'; ?>';
+
+   var keyword = jQuery('#prdnameid').val();
+ var curcatslg = '<?php $cate = get_queried_object();
+$cateslg = $cate->slug;
+echo $cateslg; ?>';
+var finalurl = caturl+curcatslg;
+  var finalkeysearchurl = finalurl+'?s='+keyword;
+   window.location.href = finalkeysearchurl;
+ } else{
+  alert('please enter keyword');
+  return false;
+ }
+
+});
+
+
+
+$(".up-sells").find("h2:contains('You may also like…')").text('Related Products');
+/* changed you may also like with Related Products   */
+
+  });
+</script>
+<script>
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+<script src="https://masonry.desandro.com/masonry.pkgd.js"></script>
+<script>
+  const grid = document.querySelector(".grid");
+  const msnry = new Masonry(grid, {
+    itemSelector: ".grid-item",
+    gutter: 0
+  });
 </script>
   <?php wp_footer(); ?>
 </body>
+
 
 </html>

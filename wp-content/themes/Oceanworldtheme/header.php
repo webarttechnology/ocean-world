@@ -31,24 +31,26 @@
 <header class="header-part d-transparent fixed-top" id="site-header">
     <div class="container" id="site-container">
         <div class="top-header" id="top-header">
-            <div class="row">
+            <div class="row justify-content-between">
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_field('header_logo',$pageid); ?>"></a>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="stellarnav">
                  
                         <?php wp_nav_menu( array('menu' => 'main menu', 'container' => '', 'items_wrap' => '<ul class="top-menu">%3$s</ul>' )); ?>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="header-icon d-flex">
                         <ul class="d-flex">
                             <li class="shop-bag"><a href="<?php echo get_site_url(); ?>/cart"><i class="bi bi-cart3"></i></a></li>
-                            <li class="number"><input type="text" placeholder="<?php echo WC()->cart->get_cart_contents_count(); ?> Items"></li>
-                            <li><a href="<?php echo get_site_url(); ?>/my-account"><i class="bi bi-avtar"></i></a></li>
+                            <li class="number"><?php echo WC()->cart->get_cart_contents_count(); ?></li>
+                            <li class="shop-bag"><a href="<?php echo get_site_url(); ?>/my-account"><i class="bi bi-person"></i></a></li>
+                            <li class="shop-bag"><a href="<?php echo get_site_url(); ?>/wishlist" data-bs-toggle="tooltip" title="Wishlist"><i class="bi bi-heart"></i></i></a></li>
+                            
                          </ul>
                         <span><a href="#"><img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/image/hamberger.png"></a></span>
                     </div>

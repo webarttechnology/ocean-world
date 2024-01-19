@@ -59,7 +59,7 @@ while(have_posts()):the_post();
                 </div>
                 <div class="event_details text-left">
                     <small><?php echo get_field('booth_number',get_the_ID()); ?></small>
-                    <h3><?php the_title(); ?></h3>
+                   <a href="<?php the_permalink(); ?>"> <h3><?php the_title(); ?></h3></a>
                     <p><?php echo get_field('event_address',get_the_ID()); ?></p>
                     <p><?php echo  $finalloopcontent; ?></p>
                 </div>

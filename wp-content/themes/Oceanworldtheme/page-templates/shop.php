@@ -36,12 +36,12 @@
 
 <!-- selling-product -->
 <section class="innerContent">
-    <div class="categories-image1">
-        <img src="./assets/image/greenishleaves.png">
+    <!-- <div class="categories-image1">
+        <img src="<?php //echo get_template_directory(); ?>/../assets/image/greenishleaves.png">
     </div>
     <div class="categories-image2">
-        <img src="./assets/image/fishes.png">
-    </div>
+        <img src="<?php// echo get_template_directory(); ?>/../assets/image/fishes.png">
+    </div> -->
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-3 category">

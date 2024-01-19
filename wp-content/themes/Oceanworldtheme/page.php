@@ -19,7 +19,7 @@ while(have_posts()):the_post();
 
 <!-- banner -->
 
-    <section class="banner-part innerbanner" style="background-image:url(<?php the_field('inner_banner'); ?>);">
+<section class="banner-part innerbanner" style="background-image:url(<?php the_field('inner_banner'); ?>);">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
