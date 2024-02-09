@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:     Product Slider for WooCommerce
- * Plugin URI:      https://shapedplugin.com/woocommerce-product-slider/?ref=1
+ * Plugin URI:      https://wooproductslider.io/pricing/?ref=1
  * Description:     Slide your WooCommerce Products in a tidy and professional slider or carousel with an easy-to-use and intuitive Shortcode Generator. Highly customizable and No coding required!
- * Version:         2.6.9
+ * Version:         2.7.0
  * Author:          ShapedPlugin LLC
  * Author URI:      https://shapedplugin.com/
  * License:         GPLv3
@@ -11,7 +11,7 @@
  * Requires at least: 5.0
  * Requires PHP: 5.6
  * WC requires at least: 4.5
- * WC tested up to: 8.2.1
+ * WC tested up to: 8.5.2
  * Text Domain:     woo-product-slider
  * Domain Path:     /languages
  *
@@ -26,7 +26,7 @@ if ( ! defined( 'SP_WPS_NAME' ) ) {
 	define( 'SP_WPS_NAME', 'woo-product-slider' );
 }
 if ( ! defined( 'SP_WPS_VERSION' ) ) {
-	define( 'SP_WPS_VERSION', '2.6.9' );
+	define( 'SP_WPS_VERSION', '2.7.0' );
 }
 if ( ! defined( 'SP_WPS_PATH' ) ) {
 	define( 'SP_WPS_PATH', plugin_dir_path( __FILE__ ) . 'src/' );
@@ -50,13 +50,16 @@ function is_woo_product_slider_pro() {
 	}
 }
 
-/**
- * Shortcode converter function
- *
- * @param int $id Slider product id.
- */
-function woo_product_slider_id( $id ) {
-	echo do_shortcode( '[woo_product_slider id="' . $id . '"]' );
+if ( ! function_exists( 'woo_product_slider' ) ) {
+	/**
+	 * Shortcode converter function
+	 *
+	 * @param  int $id shortcode id.
+	 * @return void
+	 */
+	function woo_product_slider( $id ) {
+		echo do_shortcode( '[woo_product_slider id="' . $id . '"]' );
+	}
 }
 
 // Declare that the plugin is compatible with WooCommerce High-Performance order storage feature.

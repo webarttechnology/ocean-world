@@ -163,10 +163,12 @@
       },
       breakpoints: {
         0: {
-          slidesPerView: 1
+          slidesPerView: 1,
+          depth:0,
         },
         640: {
-          slidesPerView:2
+          slidesPerView:2,
+          depth:0,
         },
       },
     });
@@ -175,9 +177,8 @@
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/script.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/stellarnav.js"></script>
 <script type="text/javascript">
-  jQuery(document).ready(function ($) 
-       {
-           var isuserlogged = '<?php if(is_user_logged_in()){
+  jQuery(document).ready(function ($) {
+      var isuserlogged = '<?php if(is_user_logged_in()){
           echo 'logged';
         }
         else
@@ -205,8 +206,7 @@
 
       /* Search section starts here  */
 
-$('.keysearchid').hide();
-//jQuery('.keysearchid').css('display','none');
+jQuery('.keysearchid').hide();
 
 var isprodcat = '<?php if(is_product_category())
 {
@@ -220,38 +220,53 @@ else
 ?>';
 if(isprodcat=='yes')
 {
-  //jQuery('.keysearchid').show();
-  jQuery('.keysearchid').css('display','block');
+  jQuery('.keysearchid').show();
 }
 
-jQuery('#salcatid').change(function(){
+jQuery('[name="selcat"]').change(function(){
 
-// product-category/animals-on-springs/
 var selectedcat = jQuery('#salcatid').val();
 var caturl = '<?php echo get_site_url().'/product-category/'; ?>';
-var finalurl = caturl+selectedcat;
-window.location.href = finalurl;
-jQuery('.keysearchid').show();
+if(selectedcat)
+{
+  var finalurl = caturl+selectedcat;
+  window.location.href = finalurl;
+  jQuery('.keysearchid').show();
+}
+else
+{
+  jQuery('.keysearchid').hide();
+}
 
 });
 
-jQuery('#archivbtn').click(function(e){
- e.preventDefault();
- var b = $("#prdnameid").val();
- if(b!==""){
- var caturl = '<?php echo get_site_url().'/product-category/'; ?>';
+jQuery('#archivbtn').click(function(e)
+{
+   e.preventDefault();
+   var b = $("#prdnameid").val();
+   if(b!=="")
+     {
+        var caturl = '<?php  echo get_site_url().'/product-category/'; ?>';
+        var keyword = b;
+        var curcatslg = '<?php if( is_product_category() ) { $cate = get_queried_object();
+        $cateslg = $cate->slug;
+         echo $cateslg;
+        }
+        else
+        {
+         echo '';
+        }
 
-   var keyword = jQuery('#prdnameid').val();
- var curcatslg = '<?php $cate = get_queried_object();
-$cateslg = $cate->slug;
-echo $cateslg; ?>';
-var finalurl = caturl+curcatslg;
-  var finalkeysearchurl = finalurl+'?s='+keyword;
-   window.location.href = finalkeysearchurl;
- } else{
-  alert('please enter keyword');
-  return false;
- }
+        ?>';
+        var finalurl = caturl+curcatslg;
+        var finalkeysearchurl = finalurl+'?s='+keyword;
+        window.location.href = finalkeysearchurl;
+   } 
+   else
+   {
+     alert('please enter keyword');
+     return false;
+   }
 
 });
 

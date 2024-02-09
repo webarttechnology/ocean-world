@@ -34,6 +34,7 @@ class Dashboard_Notice {
 		add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
 		add_action( 'wp_ajax_sp-wps-never-show-review-notice', array( $this, 'dismiss_review_notice' ) );
 		add_filter( 'admin_footer_text', array( $this, 'admin_footer' ), 1, 2 );
+		add_filter( 'update_footer', array( $this, 'admin_footer_version' ), 11 );
 	}
 
 	/**
@@ -51,7 +52,7 @@ class Dashboard_Notice {
 				'end_date'   => '2020-11-30 23:59:00 EST',
 				'title'      => 'Black Friday Deals - 30% OFF the <strong>Product Slider Pro for WooCommerce</strong> until November 30th!',
 				'content'    => 'Use this discount code on checkout page: <strong>BF2020</strong>',
-				'link'       => 'https://shapedplugin.com/woocommerce-product-slider/?utm_source=wordpress-wps&utm_medium=get-it-now&utm_campaign=BlackFriday2020',
+				'link'       => 'https://wooproductslider.io/?utm_source=wordpress-wps&utm_medium=get-it-now&utm_campaign=BlackFriday2020',
 			),
 		);
 
@@ -225,11 +226,10 @@ class Dashboard_Notice {
 			</div>
 			<div class="sp-wps-notice-text">
 				<h3>Enjoying <strong>Product Slider for Woocommerce</strong>?</h3>
-				<p>Hope that you had a good experience with the <strong>Product Slider for Woocommerce</strong>. Would you please show us a little love by rating us in the <a href="https://wordpress.org/support/plugin/woo-product-slider/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a>?
-				Just a minute to rate the plugin. Thank you!</p>
+				<p>We hope you had a wonderful experience using <strong>Woo Product Slider</strong>. Please take a moment to leave a review on <a href="https://wordpress.org/support/plugin/woo-product-slider/reviews/?filter=5#new-post" target="_blank"><strong>WordPress.org</strong></a>. Your positive review will help us improve. Thanks! 😊</p>
 
 				<p class="sp-wps-review-actions">
-					<a href="https://wordpress.org/support/plugin/woo-product-slider/reviews/?filter=5#new-post" target="_blank" class="button button-primary notice-dismissed rate-woo-product-slider">Ok, you deserve it</a>
+					<a href="https://wordpress.org/support/plugin/woo-product-slider/reviews/?filter=5#new-post" target="_blank" class="button button-primary notice-dismissed rate-woo-product-slider">Ok, you deserve ★★★★★</a>
 					<a href="#" class="notice-dismissed remind-me-later"><span class="dashicons dashicons-clock"></span>Nope, maybe later
 </a>
 					<a href="#" class="notice-dismissed never-show-again"><span class="dashicons dashicons-dismiss"></span>Never show again</a>
@@ -287,7 +287,7 @@ class Dashboard_Notice {
 		switch ( isset( $post_data['notice_dismissed_data'] ) ? $post_data['notice_dismissed_data'] : '' ) {
 			case '1':
 				$review['time']      = time();
-				$review['dismissed'] = false;
+				$review['dismissed'] = true;
 				break;
 			case '2':
 				$review['time']      = time();
@@ -313,7 +313,22 @@ class Dashboard_Notice {
 		if ( 'sp_wps_shortcodes' === $screen->post_type || 'sp_wps_shortcodes_page_wps_settings' === $screen->id ) {
 
 			$url  = 'https://wordpress.org/support/plugin/woo-product-slider/reviews/?filter=5#new-post';
-			$text = sprintf( wp_kses_post( 'If you like <strong>Product Slider for WooCommerce</strong> please leave us a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. ', 'woo-product-slider' ), $url );
+			$text = sprintf( wp_kses_post( 'Enjoying <strong>Product Slider for WooCommerce?</strong> Please rate us <span class="spwps-footer-text-star">★★★★★</span> <a href="%s" target="_blank">WordPress.org</a>. Your positive feedback will help us grow more. Thank you! 😊', 'woo-product-slider' ), $url );
+		}
+
+		return $text;
+	}
+	/**
+	 * Footer version Text
+	 *
+	 * @param string $text Footer version text.
+	 *
+	 * @return string
+	 */
+	public function admin_footer_version( $text ) {
+		$screen = get_current_screen();
+		if ( 'sp_wps_shortcodes' === $screen->post_type ) {
+			$text = 'Woo Product Slider ' . SP_WPS_VERSION;
 		}
 
 		return $text;

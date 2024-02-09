@@ -54,6 +54,7 @@ if ( ! class_exists( 'SPF_WPSP_Field_select' ) ) {
 					'sortable'    => false,
 					'ajax'        => false,
 					'preview'     => false,
+					'nav-preview' => false,
 					'settings'    => array(),
 					'query_args'  => array(),
 				)
@@ -128,6 +129,7 @@ if ( ! class_exists( 'SPF_WPSP_Field_select' ) ) {
 						if ( $pro_only || isset( $option['name'] ) ) {
 							$selected = ( in_array( $option_key, $this->value ) ) ? ' selected' : '';
 							if ( in_array( $option_key, $this->value ) ) {
+								var_dump($option_key);
 								$selected_value = $option_key;
 							}
 							echo '<option value="' . esc_attr( $option_key ) . '" ' . esc_attr( $selected ) . esc_attr( $pro_only ) . '>' . esc_attr( $option['name'] ) . '</option>';
@@ -138,6 +140,10 @@ if ( ! class_exists( 'SPF_WPSP_Field_select' ) ) {
 					echo '</select>';
 					if ( isset( $args['preview'] ) && $args['preview'] ) {
 						echo '<img src="' . SPF_WPSP::include_plugin_url( 'assets/images/theme/' . $selected_value . '.png' ) . '" class="theme_preview">'; // phpcs:ignore
+					}
+					if ( isset( $args['nav-preview'] ) && $args['nav-preview'] ) {
+						echo '<img src="' . esc_url( SPF_WPSP::include_plugin_url( 'assets/images/navigation-preview/' . $selected_value . '.svg' ) ) . '" class="nav_preview">';
+						echo '<div class="wps-pro-notice"></div>';
 					}
 				} else {
 					echo ( ( ! empty( $this->field['empty_message'] ) ) ? esc_attr( $this->field['empty_message'] ) : esc_html__( 'No data available.', 'woo-product-slider' ) );

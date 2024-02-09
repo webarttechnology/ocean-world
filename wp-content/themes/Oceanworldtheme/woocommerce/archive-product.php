@@ -19,22 +19,23 @@ defined( 'ABSPATH' ) || exit;
 
 
 get_header( 'shop' );
-if(is_product_category()){
- $cate = get_queried_object();
- $cateslg = $cate->slug;
-}
+if( is_product_category() ) {
 
-if(get_field('inner_banner')){
+ $cate = get_queried_object();
+  $cateslg = $cate->slug;
+}
+if(get_field('inner_banner'))
+{
 ?>
 
-	<section class="banner-part innerbanner" style="background-image:url(<?php the_field('inner_banner'); ?>);">
+    <section class="banner-part innerbanner" style="background-image:url(<?php the_field('inner_banner'); ?>);">
 <?php }
 else
 {
-	?>
+    ?>
 
-	<section class="banner-part innerbanner" style="background-image:url(<?php echo get_stylesheet_directory_uri().'/assets/image/banner.png'; ?>);">
-<?php 	
+    <section class="banner-part innerbanner" style="background-image:url(<?php echo get_stylesheet_directory_uri().'/assets/image/banner.png'; ?>);">
+<?php   
 
 } ?>
   <div class="container">
@@ -56,6 +57,8 @@ else
                        <form method="get" action="" >
                        <div class="category_search">
                         <div class="row justify-content-between">
+                       <?php      if( is_product_category() ) 
+                       {  ?>
                             <div class="col-md-4 col-sm-6">
                                 <select name="selcat" id="salcatid"  class="form-select" required>
                                     <option value="">Choose category</option>
@@ -81,6 +84,35 @@ else
 
                                 </select>
                             </div>
+                        <?php }
+                        else{
+                            ?>
+                                    <div class="col-md-4 col-sm-6">
+                                <select name="selcat" id="salcatid"  class="form-select" required>
+                                    <option value="">Choose category</option>
+                                 <?php foreach($productterms as $eachprodcatobj)
+                                      {
+                                       if($eachprodcatobj->slug=='uncategorized')
+                                            {continue;}
+
+                                       
+                                    ?>
+                                        <option value="<?php echo $eachprodcatobj->slug;  ?>"  ><?php echo $eachprodcatobj->name;  ?></option>
+                                   <?php  
+                                     
+
+                                       }
+                                    ?>
+
+                                </select>
+                                </div>
+
+                       
+
+                       <?php  }
+
+
+                         ?>
                             <div class="col-md-5 col-sm-6 keysearchid" >
                                 <input type="text" class="form-control" name="prdname" id="prdnameid" placeholder="Search by keyword" required>
                             </div>
@@ -138,8 +170,8 @@ else
     </div>
 
  <div class="container">
- 	<div class="row">
- 		
+    <div class="row">
+        
              <?php
              $wooprodcat = array(
           'taxonomy' => 'product_cat',
@@ -150,9 +182,9 @@ else
       );
          $productterms = get_terms( $wooprodcat );
  
- 		 ?>
- 		
- 		   <div class="col-md-4 col-lg-3 category">
+         ?>
+        
+           <div class="col-md-4 col-lg-3 category">
                 <h4>Categories</h4>
                 <div class="accordion accordion-flush" id="faqlist">
                     <?php foreach($productterms as $eachprodcatobj)
@@ -218,51 +250,51 @@ else
                   
                 </div>
             </div>
- 		<div class="col-md-8 col-lg-9">
+        <div class="col-md-8 col-lg-9">
 
 
 <?php
 if ( woocommerce_product_loop() ) {
 
-	/**
-	 * Hook: woocommerce_before_shop_loop.
-	 *
-	 * @hooked woocommerce_output_all_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
-	 */
-	do_action( 'woocommerce_before_shop_loop' );
+    /**
+     * Hook: woocommerce_before_shop_loop.
+     *
+     * @hooked woocommerce_output_all_notices - 10
+     * @hooked woocommerce_result_count - 20
+     * @hooked woocommerce_catalog_ordering - 30
+     */
+    do_action( 'woocommerce_before_shop_loop' );
 
-	woocommerce_product_loop_start();
+    woocommerce_product_loop_start();
 
-	if ( wc_get_loop_prop( 'total' ) ) {
-		while ( have_posts() ) {
-			the_post();
+    if ( wc_get_loop_prop( 'total' ) ) {
+        while ( have_posts() ) {
+            the_post();
 
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-			do_action( 'woocommerce_shop_loop' );
+            /**
+             * Hook: woocommerce_shop_loop.
+             */
+            do_action( 'woocommerce_shop_loop' );
 
-			wc_get_template_part( 'content', 'product' );
-		}
-	}
+            wc_get_template_part( 'content', 'product' );
+        }
+    }
 
-	woocommerce_product_loop_end();
+    woocommerce_product_loop_end();
 
-	/**
-	 * Hook: woocommerce_after_shop_loop.
-	 *
-	 * @hooked woocommerce_pagination - 10
-	 */
-	do_action( 'woocommerce_after_shop_loop' );
+    /**
+     * Hook: woocommerce_after_shop_loop.
+     *
+     * @hooked woocommerce_pagination - 10
+     */
+    do_action( 'woocommerce_after_shop_loop' );
 } else {
-	/**
-	 * Hook: woocommerce_no_products_found.
-	 *
-	 * @hooked wc_no_products_found - 10
-	 */
-	do_action( 'woocommerce_no_products_found' );
+    /**
+     * Hook: woocommerce_no_products_found.
+     *
+     * @hooked wc_no_products_found - 10
+     */
+    do_action( 'woocommerce_no_products_found' );
 }
 
 /**

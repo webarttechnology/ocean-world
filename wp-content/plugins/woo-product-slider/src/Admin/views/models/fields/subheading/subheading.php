@@ -42,9 +42,13 @@ if ( ! class_exists( 'SPF_WPSP_Field_subheading' ) ) {
 		 * @return void
 		 */
 		public function render() {
+			$check_replace_layout = ! empty( $this->field['replace_layout'] ) ? true : false;
 
-			echo ( ! empty( $this->field['content'] ) ) ? wp_kses_post( $this->field['content'] ) : '';
-
+			if ( $check_replace_layout ) {
+				echo '<div class="spwps-replace-layout"><img src="' . esc_url( SP_WPS_URL ) . 'Admin/assets/images/replace-layout.webp" alt="replace layout"/></div>';
+			} else {
+				echo ( ! empty( $this->field['content'] ) ) ? wp_kses_post( $this->field['content'] ) : '';
+			}
 		}
 
 	}

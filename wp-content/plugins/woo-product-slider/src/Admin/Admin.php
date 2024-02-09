@@ -12,8 +12,7 @@ namespace ShapedPlugin\WooProductSlider\Admin;
 use ShapedPlugin\WooProductSlider\Admin\views\models\classes\SPF_WPSP;
 use ShapedPlugin\WooProductSlider\Admin\Dashboard_Notice;
 use ShapedPlugin\WooProductSlider\Admin\DBUpdates;
-use ShapedPlugin\WooProductSlider\Admin\Helper\Help_Page;
-use ShapedPlugin\WooProductSlider\Admin\Helper\Premium_Page;
+use ShapedPlugin\WooProductSlider\Admin\HelpPage\Help_Page;
 use ShapedPlugin\WooProductSlider\Admin\Helper\SP_WPS_WQV;
 
 /**
@@ -29,7 +28,6 @@ class Admin {
 		new SPF_WPSP();
 		new Dashboard_Notice();
 		new DBUpdates();
-		new Premium_Page();
 		new Help_Page();
 		new SP_WPS_WQV();
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
@@ -58,10 +56,10 @@ class Admin {
 		$labels = apply_filters(
 			'sp_wps_post_type_labels',
 			array(
-				'name'               => esc_html__( 'All Sliders', 'woo-product-slider' ),
+				'name'               => esc_html__( 'Manage Sliders', 'woo-product-slider' ),
 				'singular_name'      => esc_html__( 'Product Slider', 'woo-product-slider' ),
 				'menu_name'          => esc_html__( 'Product Slider', 'woo-product-slider' ),
-				'all_items'          => esc_html__( 'All Sliders', 'woo-product-slider' ),
+				'all_items'          => esc_html__( 'Manage Sliders', 'woo-product-slider' ),
 				'add_new'            => esc_html__( 'Add New', 'woo-product-slider' ),
 				'add_new_item'       => esc_html__( 'Add New Slider', 'woo-product-slider' ),
 				'edit'               => esc_html__( 'Edit', 'woo-product-slider' ),

@@ -2,11 +2,11 @@
 Contributors: shapedplugin, rubel_miah, shamimmiashuhagh, khalilu
 Tags: woocommerce product slider, woocommerce products carousel, woocommerce product grid, woocommerce product table, woocommerce product carousel slider, woocommerce widget product slider, product carousel, product slider, product grid, product table, best woocommerce product slider, best product slider, product slider for woocommerce, product carousel for woocommerce, woocommerce category slider, woocommerce child category, woocommerce best selling products slider, upsells products, cross-sells, related products, related products slider, specific products slider, on sale products display, woocommerce featured products carousel, woocommerce free products, woocommerce out of stock products, woocommerce products from category, woocommerce to rated products, woocommerce most viewed products, woocommerce products from attributes,simple product, grouped product, external/affiliate product, variable product, woo product slider
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.4.3
 Requires PHP: 5.6
 WC requires at least: 4.5
-WC tested up to: 8.2.1
-Stable tag: 2.6.9
+WC tested up to: 8.5.2
+Stable tag: 2.7.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,7 +14,7 @@ Slide your WooCommerce Products in a tidy and professional slider or carousel wi
 
 == Description ==
 
-[__Live Demo__](https://shapedplugin.com/woocommerce-product-slider/lite-version-demo/) | [__Documentation__](https://docs.shapedplugin.com/docs/woocommerce-product-slider/overview/) | [__Upgrade to Pro!__](https://shapedplugin.com/woocommerce-product-slider/pricing/?ref=1)
+[__Live Demo__](https://wooproductslider.io/lite-version-demo/) | [__Documentation__](https://docs.shapedplugin.com/docs/woocommerce-product-slider/overview/) | [__Upgrade to Pro!__](https://wooproductslider.io/pricing/?ref=1)
 
 https://www.youtube.com/watch?v=GAxIh2a22r8&list=PLoUb-7uG-5jM6fpnrjHGUXkA9W6M2rzCG
 
@@ -142,7 +142,7 @@ PRO version users <a href="https://shapedplugin.com/support/">Support</a> and Fr
 
 
 = How to Upgrade to PRO version? =
-Go to <a href="https://shapedplugin.com/woocommerce-product-slider/pricing/?ref=1">PRO Version</a> page.
+Go to <a href="https://wooproductslider.io/pricing/?ref=1">PRO Version</a> page.
 
 = Do you want to encourage for future improvement? =
 Please give us <a href="https://wordpress.org/support/plugin/woo-product-slider/reviews/?filter=5#new-post">5 Star</a> rating the plugin.
@@ -165,6 +165,23 @@ Thanks!
 
 
 == Changelog ==
+
+= 2.7.0 - Feb 01, 2024 =
+* New: The Space between Products (Horizontal Gap, Vertical Gap) option.
+* New: The Adaptive Height feature.
+* New: The Tab & Key Navigation feature.
+* New: The Mouse Wheel feature.
+* Improved: The Plugin Backend Options Panel enhanced.
+* Improved: The ‘All Sliders’ menu item was renamed to ‘Manage Sliders’.
+* Improved: The Options of Carousel Settings were reorganized by the Nested Tab.
+* Improved: The Carousel Navigation and Pagination’s Hide in mobile option have been separated.
+* Improved: The Help Page has been redesigned to make it more user-friendly.
+* Updated: The Language (.pot) file.
+* Fix: Hidden products were displayed in a slider.
+* Fix: Pagination breaks when navigation is hidden.
+* Fix: The plugin style issues for the RTL site.
+* Tested: WooCommerce 8.5.1 compatibility.
+* Tested: WordPress 6.4.3 compatibility.
 
 = 2.6.9 - Oct 31, 2023 =
 * Fix: Few PHPCS warnings with PHP 8.2.

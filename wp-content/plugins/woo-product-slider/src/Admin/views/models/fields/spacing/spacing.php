@@ -63,22 +63,27 @@ if ( ! class_exists( 'SPF_WPSP_Field_spacing' ) ) {
 					'unit'               => true,
 					'show_units'         => true,
 					'all'                => false,
+					'vertical'           => false,
+					'show_title'         => false,
 					'units'              => array( 'px', '%', 'em' ),
 				)
 			);
 
 			$default_values = array(
-				'top'    => '',
-				'right'  => '',
-				'bottom' => '',
-				'left'   => '',
-				'all'    => '',
-				'unit'   => 'px',
+				'top'      => '',
+				'right'    => '',
+				'bottom'   => '',
+				'left'     => '',
+				'all'      => '',
+				'vertical' => '',
+				'unit'     => 'px',
 			);
 
 			$value   = wp_parse_args( $this->value, $default_values );
 			$unit    = ( count( $args['units'] ) === 1 && ! empty( $args['unit'] ) ) ? $args['units'][0] : '';
 			$is_unit = ( ! empty( $unit ) ) ? ' spwps--is-unit' : '';
+			$min     = ( isset( $this->field['attributes']['min'] ) ) ? 'min=' . $this->field['attributes']['min'] : '';
+			$max     = ( isset( $this->field['attributes']['max'] ) ) ? ' max=' . $this->field['attributes']['max'] : '';
 
 			echo wp_kses_post( $this->field_before() );
 
@@ -87,11 +92,15 @@ if ( ! class_exists( 'SPF_WPSP_Field_spacing' ) ) {
 			if ( ! empty( $args['all'] ) ) {
 
 				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? $args['all_placeholder'] : '';
+				$show_title  = ( $args['show_title'] ) ? '<div class="spwps--title">' . __( 'Gap', 'woo-product-slider' ) . '</div>' : '';
 
+				echo '<div class="spwps--space">';
+				echo wp_kses_post( $show_title );
 				echo '<div class="spwps--input">';
 				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="spwps--label spwps--icon">' . wp_kses_post( $args['all_icon'] ) . '</span>' : '';
-				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '" placeholder="' . esc_attr( $placeholder ) . '" class="spwps-input-number' . esc_attr( $is_unit ) . '" step="any" />';
+				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '" placeholder="' . esc_attr( $placeholder ) . '" class="spwps-input-number' . esc_attr( $is_unit ) . '" ' . esc_attr( $min . $max ) . ' step="any" />';
 				echo ( $unit ) ? '<span class="spwps--label spwps--unit">' . esc_attr( $args['units'][0] ) . '</span>' : '';
+				echo '</div>';
 				echo '</div>';
 
 			} else {
@@ -108,24 +117,9 @@ if ( ! class_exists( 'SPF_WPSP_Field_spacing' ) ) {
 
 				foreach ( $properties as $property ) {
 					echo '<div class="spwps--spacing-input">';
-					switch ( $property ) {
-						case 'top':
-							$spacing_title = 'Top';
-							break;
-						case 'right':
-							$spacing_title = 'Right';
-							break;
-						case 'bottom':
-							$spacing_title = 'Bottom';
-							break;
-						case 'left':
-							$spacing_title = 'Left';
-							break;
-					}
-					echo '<div class="spwps--title">' . esc_html__( $spacing_title, 'woo-product-slider' ) . '</div>';
-
 					$placeholder = ( ! empty( $args[ $property . '_placeholder' ] ) ) ? $args[ $property . '_placeholder' ] : '';
-
+					/* translators: %s: property modify title. */
+					echo '<div class="spwps--title">' . esc_html( sprintf( '%s', $placeholder ) ) . '</div>';
 					echo '<div class="spwps--input">';
 					echo ( ! empty( $args[ $property . '_icon' ] ) ) ? '<span class="spwps--label spwps--icon">' . wp_kses_post( $args[ $property . '_icon' ] ) . '</span>' : '';
 					echo '<input type="number" name="' . esc_attr( $this->field_name( '[' . $property . ']' ) ) . '" value="' . esc_attr( $value[ $property ] ) . '" placeholder="' . esc_attr( $placeholder ) . '" class="spwps-input-number' . esc_attr( $is_unit ) . ' spwps-number" step="any" />';
@@ -134,6 +128,20 @@ if ( ! class_exists( 'SPF_WPSP_Field_spacing' ) ) {
 					echo '</div>';
 
 				}
+			}
+
+			if ( ! empty( $args['vertical'] ) ) {
+
+				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? ' placeholder="' . esc_attr( $args['all_placeholder'] ) . '"' : '';
+
+				echo '<div class="spwps--space">';
+				echo '<div class="spwps--title">' . esc_html__( 'Vertical Gap', 'woo-product-slider' ) . '</div>';
+				echo '<div class="spwps--input">';
+				echo ( ! empty( $args['vertical_icon'] ) ) ? '<span class="spwps--label spwps--icon">' . $args['vertical_icon'] . '</span>' : '';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<input type="number" name="' . esc_attr( $this->field_name( '[vertical]' ) ) . '" value="' . esc_attr( $value['vertical'] ) . '"' . $placeholder . ' class="spwps-input-number' . esc_attr( $is_unit ) . '" step="any" />';// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo ( $unit ) ? '<span class="spwps--label spwps--unit">' . esc_attr( $args['units'][0] ) . '</span>' : '';
+				echo '</div>';
+				echo '</div>';
 			}
 
 			if ( ! empty( $args['unit'] ) && ! empty( $args['show_units'] ) && count( $args['units'] ) > 1 ) {

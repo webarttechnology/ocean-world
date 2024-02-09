@@ -1968,3 +1968,12 @@ button.woocommerce-Button , .woocommerce-address-fields .button , .wc-block-comp
 .photo {
     background-size: auto 100% !important;
 }
+
+/* table cell border css added on 9th Feb 2024...Pushan for product details table formatting   */
+table, th, td {
+  border: 1px solid black;
+
+}
+.proddimm{
+font-size:14px;
+}

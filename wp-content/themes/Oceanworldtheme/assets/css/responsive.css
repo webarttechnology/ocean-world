@@ -257,6 +257,9 @@
   .related.products .product {
     width: 33.333% !important;
   }
+  .elemement1 {
+    width: 350px;
+}
 }
 @media screen and (max-width: 767px) {
   .top-header .col-md-3:first-child {
@@ -505,6 +508,9 @@
 .woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register {
   min-height: auto;
 }
+.m-5 {
+  margin:1rem 0rem 0rem !important;
+}
 }
 @media screen and (max-width: 575px) {
   .banner-part {
@@ -549,7 +555,7 @@
     font-size: 15px;
   }
   .posts .swiper-slide a h3 {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
   .post-item-content {
     top: calc(100% - 86px);

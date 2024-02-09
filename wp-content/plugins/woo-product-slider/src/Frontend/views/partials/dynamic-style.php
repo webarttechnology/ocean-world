@@ -7,46 +7,54 @@
  * @author     ShapedPlugin <support@shapedplugin.com>
  */
 
-$slider_title    = isset( $shortcode_data['slider_title'] ) ? $shortcode_data['slider_title'] : false;
-$pagination_data = isset( $shortcode_data['pagination'] ) ? $shortcode_data['pagination'] : '';
-switch ( $pagination_data ) {
-	case 'true':
-		$pagination        = 'true';
-		$pagination_mobile = 'true';
-		break;
-	case 'hide_on_mobile':
-		$pagination        = 'true';
-		$pagination_mobile = 'false';
-		break;
-	default:
-		$pagination        = 'false';
-		$pagination_mobile = 'false';
-}
-$pagination_dots_bg = isset( $shortcode_data['pagination_dots_color'] ) ? $shortcode_data['pagination_dots_color'] : array(
+$slider_title            = isset( $shortcode_data['slider_title'] ) ? $shortcode_data['slider_title'] : false;
+$pagination_dots_bg      = isset( $shortcode_data['pagination_dots_color'] ) ? $shortcode_data['pagination_dots_color'] : array(
 	'color'        => '#cccccc',
 	'active_color' => '#333333',
 );
-$navigation_data    = isset( $shortcode_data['navigation_arrow'] ) ? $shortcode_data['navigation_arrow'] : '';
-switch ( $navigation_data ) {
-	case 'true':
-		$navigation        = 'true';
-		$navigation_mobile = 'true';
-		break;
-	case 'hide_on_mobile':
-		$navigation        = 'true';
-		$navigation_mobile = 'false';
-		break;
-	default:
-		$navigation        = 'false';
-		$navigation_mobile = 'false';
+$product_margin          = isset( $shortcode_data['product_margin']['all'] ) ? $shortcode_data['product_margin']['all'] : 20;
+$product_margin_vertical = isset( $shortcode_data['product_margin']['vertical'] ) ? $shortcode_data['product_margin']['vertical'] : 20;
+// Navigation data.
+$carousel_navigation = isset( $shortcode_data['wps_carousel_navigation'] ) ? $shortcode_data['wps_carousel_navigation'] : array();
+$hide_on_mobile      = isset( $carousel_navigation['nav_hide_on_mobile'] ) ? $carousel_navigation['nav_hide_on_mobile'] : false;
+$navigation_data     = isset( $carousel_navigation['navigation_arrow'] ) ? $carousel_navigation['navigation_arrow'] : true;
+if ( $navigation_data ) {
+	$navigation        = 'true';
+	$navigation_mobile = 'true';
+} elseif ( $navigation_data && $hide_on_mobile ) {
+	$navigation        = 'true';
+	$navigation_mobile = 'false';
+} else {
+	$navigation        = 'false';
+	$navigation_mobile = 'false';
 }
-$nav_arrow_colors         = isset( $shortcode_data['navigation_arrow_colors'] ) ? $shortcode_data['navigation_arrow_colors'] : array(
+// Pagination.
+$carousel_pagination       = isset( $shortcode_data['wps_carousel_pagination'] ) ? $shortcode_data['wps_carousel_pagination'] : array();
+$pagination_hide_on_mobile = isset( $carousel_pagination['wps_pagination_hide_on_mobile'] ) ? $carousel_pagination['wps_pagination_hide_on_mobile'] : false;
+$pagination_data           = isset( $carousel_pagination['pagination'] ) ? $carousel_pagination['pagination'] : true;
+if ( $pagination_data ) {
+	$pagination        = 'true';
+	$pagination_mobile = 'true';
+} elseif ( $pagination_data && $pagination_hide_on_mobile ) {
+	$pagination        = 'true';
+	$pagination_mobile = 'false';
+} else {
+	$pagination        = 'false';
+	$pagination_mobile = 'false';
+}
+$nav_arrow_colors = isset( $shortcode_data['navigation_arrow_colors'] ) ? $shortcode_data['navigation_arrow_colors'] : array(
 	'color'            => '#444444',
 	'hover_color'      => '#ffffff',
 	'background'       => 'transparent',
 	'hover_background' => '#444444',
-	'border'           => '#aaaaaa',
-	'hover_border'     => '#444444',
+	// 'border'           => '#aaaaaa',
+	// 'hover_border'     => '#444444',
+);
+$nav_arrow_border         = isset( $shortcode_data['navigation_border']['all'] ) ? $shortcode_data['navigation_border'] : array(
+	'all'         => '1',
+	'style'       => 'solid',
+	'color'       => '#aaaaaa',
+	'hover_color' => '#444444',
 );
 $product_del_price_color  = isset( $shortcode_data['product_del_price_color'] ) ? $shortcode_data['product_del_price_color'] : '#888888';
 $product_rating_colors    = isset( $shortcode_data['product_rating_colors'] ) ? $shortcode_data['product_rating_colors'] : array(
@@ -140,7 +148,7 @@ if ( 'true' === $pagination ) {
     #wps-slider-section #sp-woo-product-slider-' . $post_id . '.wps-product-section .wpsp-pagination-dot .swiper-pagination-bullet.swiper-pagination-bullet-active{
         background-color:' . $pagination_dots_bg['active_color'] . ';
     }';
-	if ( 'hide_on_mobile' === $pagination_data ) {
+	if ( $pagination_hide_on_mobile ) {
 		$dynamic_style .= '@media (max-width: 480px) {
 			#wps-slider-section #sp-woo-product-slider-' . $post_id . '.wps-product-section .wpsp-pagination-dot {
                 display:none;
@@ -155,14 +163,14 @@ if ( 'true' === $navigation ) {
 	$dynamic_style                   .= '#wps-slider-section #sp-woo-product-slider-' . $post_id . '.wps-product-section .wpsp-nav {
         color:' . $nav_arrow_colors['color'] . ';
         background-color:' . $nav_arrow_colors['background'] . ';
-        border: 1px solid ' . $nav_arrow_colors['border'] . ';
+        border: ' . $nav_arrow_border['all'] . 'px ' . $nav_arrow_border['style'] . ' ' . $nav_arrow_border['color'] . ';
     }
     #wps-slider-section #sp-woo-product-slider-' . $post_id . '.wps-product-section .wpsp-nav:hover {
         color:' . $nav_arrow_colors['hover_color'] . ';
         background-color:' . $nav_arrow_colors['hover_background'] . ';
-        border-color:' . $nav_arrow_colors['hover_border'] . ';
+        border-color:' . $nav_arrow_border['hover_color'] . ';
     }';
-	if ( 'hide_on_mobile' === $navigation_data ) {
+	if ( $hide_on_mobile ) {
 		$dynamic_style .= '@media (max-width: 480px) {
 			#wps-slider-section #sp-woo-product-slider-' . $post_id . '.wps-product-section .wpsp-nav {
                 display:none;
@@ -176,7 +184,15 @@ if ( 'true' === $navigation && ! $slider_title ) {
         padding-top: 45px;
     }';
 }
-$layout_preset = isset( $wps_layouts['layout_preset'] ) ? $wps_layouts['layout_preset'] : 'slider';
+
+$layout_preset  = isset( $wps_layouts['layout_preset'] ) ? $wps_layouts['layout_preset'] : 'slider';
+$dynamic_style .= '#wps-slider-section #sp-woo-product-slider-' . $post_id . '.wps-product-section[data-layout=grid] {
+    margin-left: -' . $product_margin . 'px;
+}
+#wps-slider-section #sp-woo-product-slider-' . $post_id . ' .wpsf-grid-item {
+    padding-left: ' . $product_margin . 'px;
+    margin-bottom: ' . $product_margin_vertical . 'px;
+}';
 
 if ( $product_name ) {
 	$dynamic_style .= '#wps-slider-section #sp-woo-product-slider-' . $post_id . ' .wpsf-product-title a{

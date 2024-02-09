@@ -265,6 +265,8 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 					$meta  = get_post_meta( $post->ID, $this->unique, true );
 					$value = ( isset( $meta[ $field['id'] ] ) ) ? $meta[ $field['id'] ] : null;
 				}
+			} elseif ( 'tabbed' === $field['type'] ) {
+				$value = get_post_meta( $post->ID, $this->unique, true );
 			}
 
 			$default = ( isset( $field['id'] ) ) ? $this->get_default( $field ) : '';
@@ -331,8 +333,8 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 			$the_current_post_type = $current_screen->post_type;
 			if ( 'sp_wps_shortcodes' === $the_current_post_type && $shortcode_show ) {
 				echo '<div class="sp-wpsp-mbf-banner">';
-				echo '<div class="sp-wpsp-mbf-logo"><img src="' . esc_url( SP_WPS_URL ) . 'Admin/assets/images/wps-logo.svg" alt="Product Slider Pro for WooCommerce"></div>';
-				echo '<div class="sp-wpsp-mbf-short-links"><a href="https://shapedplugin.com/support/" target="_blank"><i class="fa fa-life-ring"></i> Support</a></div>';
+				echo '<div class="sp-wpsp-mbf-logo"><img src="' . esc_url( SP_WPS_URL ) . 'Admin/assets/images/wps-logo.svg" alt="Product Slider for WooCommerce"></div>';
+				echo '<div class="sp-wpsp-submit-options"><span class="support-area"><i class="fa fa-life-ring"></i> Support</span><div class="spwps-help-text spwps-support"><div class="spwps-info-label">Documentation</div>Check out our documentation and more information about what you can do with the Product Slider for WooCommerce.<a class="spwps-open-docs browser-docs" href="https://docs.shapedplugin.com/docs/woocommerce-product-slider/overview/" target="_blank">Browse Docs</a><div class="spwps-info-label">Need Help or Missing a Feature?</div>Feel free to get help from our friendly support team or request a new feature if needed. We appreciate your suggestions to make the plugin better.<a class="spwps-open-docs support" href="https://shapedplugin.com/create-new-ticket/" target="_blank">Get Help</a><a class="spwps-open-docs feature-request" href="https://shapedplugin.com/contact-us/" target="_blank">Request a Feature</a></div></div>';
 				echo '</div>';
 				?>
 		<div class="wpspro_shortcode text-center">
@@ -340,8 +342,8 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 		<div class="wpspro-after-copy-text wpspro-pagination-not-work"><i class="fa fa-check-circle"></i> The pagination will work in the frontend well. </div>
 		<div class="wpspro-after-copy-text"><i class="fa fa-check-circle"></i> Shortcode Copied to Clipboard! </div>
 		<div class="wpspro_shortcode_content">
-			<h2 class="wpspro-shortcode-title"><?php echo esc_html__( 'Shortcode', 'woo-product-slider' ); ?> </h2>
-			<p><?php echo esc_html__( 'Copy and paste this shortcode into your posts or pages:', 'woo-product-slider' ); ?></p>
+			<h2 class="wpspro-shortcode-title"><?php esc_html_e( 'Shortcode', 'woo-product-slider' ); ?> </h2>
+			<p><?php esc_html_e( 'Copy and paste this shortcode into your posts or pages:', 'woo-product-slider' ); ?></p>
 			<div class="shortcode-wrap">
 				<div class="spsc-code selectable">[woo_product_slider <?php echo 'id="' . esc_attr( $post->ID ) . '"'; ?>]</div>
 			</div>
@@ -349,10 +351,16 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 	</div>
 	<div class="wpspro-col-lg-3">
 		<div class="wpspro_shortcode_content">
-			<h2 class="wpspro-shortcode-title"><?php echo esc_html__( 'Template Include', 'woo-product-slider' ); ?> </h2>
-			<p><?php echo esc_html__( 'Paste the PHP code into your template file:', 'woo-product-slider' ); ?></p>
+			<h2 class="wpspro-shortcode-title"><?php esc_html_e( 'Page Builders', 'woo-product-slider' ); ?> </h2>
+			<p class="wpspro-page-builder-note"><?php echo wp_kses_post( 'Woo Product Slider has seamless integration with <b>Gutenberg</b>, Classic Editor, Elementor, Divi, Bricks, Beaver, Oxygen, WPBakery Builder, etc.' ); ?></p>
+		</div>
+	</div>
+	<div class="wpspro-col-lg-3">
+		<div class="wpspro_shortcode_content">
+			<h2 class="wpspro-shortcode-title"><?php esc_html_e( 'Template Include', 'woo-product-slider' ); ?> </h2>
+			<p><?php esc_html_e( 'Paste the PHP code into your template file:', 'woo-product-slider' ); ?></p>
 			<div class="shortcode-wrap">
-				<div class="spsc-code selectable">&lt;?php echo do_shortcode('[woo_product_slider id="<?php echo esc_attr( $post->ID ); ?>"]');?&gt;</div>
+				<div class="spsc-code selectable">&lt;?php woo_product_slider( <?php echo esc_attr( $post->ID ); ?> ); ?&gt;</div>
 			</div>
 		</div>
 	</div>
@@ -488,52 +496,14 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 			// XSS ok.
 			// No worries, This "POST" requests is sanitizing in the below foreach.
 			$request = ( ! empty( $_POST[ $this->unique ] ) ) ? $_POST[ $this->unique ] : array(); // phpcs:ignore
-
 			if ( ! empty( $request ) ) {
-
 				foreach ( $this->sections as $section ) {
-
 					if ( ! empty( $section['fields'] ) ) {
-
 						foreach ( $section['fields'] as $field ) {
-
-							if ( ! empty( $field['id'] ) ) {
-
-								$field_id    = $field['id'];
-								$field_value = isset( $request[ $field_id ] ) ? $request[ $field_id ] : '';
-
-								// Sanitize "post" request of field.
-								if ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
-
-										$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
-
-								} else {
-									if ( is_array( $field_value ) ) {
-										$data[ $field_id ] = wp_kses_post_deep( $field_value );
-									} else {
-										$data[ $field_id ] = wp_kses_post( $field_value );
-									}
-								}
-
-								// Validate "post" request of field.
-								if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {
-
-									$has_validated = call_user_func( $field['validate'], $field_value );
-
-									if ( ! empty( $has_validated ) ) {
-
-										$errors['sections'][ $count ]  = true;
-										$errors['fields'][ $field_id ] = $has_validated;
-										$data[ $field_id ]             = $this->get_meta_value( $field );
-
-									}
-								}
-							}
+							$this->process_field( $field, $request, $count, $data, $errors );
 						}
 					}
-
 					$count++;
-
 				}
 			}
 
@@ -610,48 +580,13 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 			$data    = array(); // Sanitize data added here.
 
 			if ( ! empty( $request ) ) {
-
 				foreach ( $this->sections as $section ) {
-
 					if ( ! empty( $section['fields'] ) ) {
-
 						foreach ( $section['fields'] as $field ) {
-
-							if ( ! empty( $field['id'] ) ) {
-
-								$field_id    = $field['id'];
-								$field_value = isset( $request[ $field_id ] ) ? $request[ $field_id ] : '';
-
-								// Sanitize "post" request of field.
-								if ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
-									$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
-								} else {
-									if ( is_array( $field_value ) ) {
-										$data[ $field_id ] = wp_kses_post_deep( $field_value );
-									} else {
-										$data[ $field_id ] = wp_kses_post( $field_value );
-									}
-								}
-
-								// Validate "post" request of field.
-								if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {
-
-									$has_validated = call_user_func( $field['validate'], $field_value );
-
-									if ( ! empty( $has_validated ) ) {
-
-										$errors['sections'][ $count ]  = true;
-										$errors['fields'][ $field_id ] = $has_validated;
-										$data[ $field_id ]             = $this->get_meta_value( $field );
-
-									}
-								}
-							}
+							$this->process_field( $field, $request, $count, $data, $errors );
 						}
 					}
-
 					$count++;
-
 				}
 			}
 			ob_start();
@@ -661,6 +596,63 @@ if ( ! class_exists( 'SPF_WPSP_Metabox' ) ) {
 			Helper::spwps_html_show( $post_id, $shortcode_data, $title );
 			echo ob_get_clean(); // phpcs:ignore
 			die();
+		}
+
+		/**
+		 * Process a field, handling tabbed fields if applicable.
+		 *
+		 * @param array $field   The field configuration.
+		 * @param array $request The POST request data.
+		 * @param int   $count   The count value.
+		 * @param array $data    The data array to be populated.
+		 * @param array $errors  The errors array to be populated.
+		 */
+		public function process_field( $field, $request, $count, &$data, &$errors ) {
+			if ( 'tabbed' === $field['type'] && ! empty( $field['tabs'] ) ) {
+				foreach ( $field['tabs'] as $tab ) {
+					if ( ! empty( $tab['fields'] ) ) {
+						foreach ( $tab['fields'] as $tab_field ) {
+							$this->process_single_field( $tab_field, $request, $count, $data, $errors );
+						}
+					}
+				}
+			} else {
+				$this->process_single_field( $field, $request, $count, $data, $errors );
+			}
+		}
+
+		/**
+		 * Process a single field, sanitizing and validating its value.
+		 *
+		 * @param array $field   The field configuration.
+		 * @param array $request The POST request data.
+		 * @param int   $count   The count value.
+		 * @param array $data    The data array to be populated.
+		 * @param array $errors  The errors array to be populated.
+		 */
+		public function process_single_field( $field, $request, $count, &$data, &$errors ) {
+			if ( ! empty( $field['id'] ) && ! ( isset( $field['only_pro'] ) ) ) {
+				$field_id    = $field['id'];
+				$field_value = isset( $request[ $field_id ] ) ? $request[ $field_id ] : '';
+
+				// Sanitize "post" request of field.
+				if ( isset( $field['sanitize'] ) && is_callable( $field['sanitize'] ) ) {
+					$data[ $field_id ] = call_user_func( $field['sanitize'], $field_value );
+				} else {
+					$data[ $field_id ] = ( is_array( $field_value ) ) ? wp_kses_post_deep( $field_value ) : wp_kses_post( $field_value );
+				}
+
+				// Validate "post" request of field.
+				if ( isset( $field['validate'] ) && is_callable( $field['validate'] ) ) {
+					$has_validated = call_user_func( $field['validate'], $field_value );
+
+					if ( ! empty( $has_validated ) ) {
+						$errors['sections'][ $count ]  = true;
+						$errors['fields'][ $field_id ] = $has_validated;
+						$data[ $field_id ]             = $this->get_meta_value( $field );
+					}
+				}
+			}
 		}
 	}
 

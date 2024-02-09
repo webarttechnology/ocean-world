@@ -10,10 +10,11 @@ img {
 
 /* Admin review notice*/
 #sp-wps-review-notice {
-	padding: 15px 15px 15px 0;
+	padding: 18px 15px 18px 0;
 	background-color: #fff;
-	border-radius: 3px;
-	margin: 20px 20px 0 0
+	border-radius: 5px;
+	margin: 20px 20px 0 0;
+	box-shadow: 0 0 20px 0 rgba(36,39,50,.08);
 }
 
 #sp-wps-review-notice .sp-wps-plugin-icon {
@@ -21,11 +22,13 @@ img {
 	float: left;
 	line-height: 90px;
 	text-align: center;
+	margin-left: 8px;
 }
 
 #sp-wps-review-notice .sp-wps-plugin-icon img {
-	max-width: 83px;
+	max-width: 94px;
 	vertical-align: middle;
+	margin-right: 8px;
 }
 
 #sp-wps-review-notice .sp-wps-notice-text {
@@ -220,10 +223,14 @@ div#spwps-preview-box {
 	margin-bottom: 5px;
 }
 /* Go Pro */
-#adminmenu #menu-posts-sp_wps_shortcodes li:last-child a,
+/* #adminmenu #menu-posts-sp_wps_shortcodes li:last-child a,
 #adminmenu #menu-posts-sp_wps_shortcodes li:last-child a:hover {
 	color: #11b916;
 	font-weight: 700;
+} */
+
+#adminmenu #menu-posts-sp_wps_shortcodes li:nth-child(8) a{
+	color: #f9be48;
 }
 
 #adminmenu #menu-posts-sp_wps_shortcodes li a .sp-go-pro-icon {
@@ -249,4 +256,7 @@ a.sp_woo_product_slider_block_edit_button {
 
 .block-editor-page .sp-wpsp-gutenberg-shortcode.editor-styles-wrapper {
 	padding-bottom: 0;
+}
+.spwps-footer-text-star {
+	color: #dba617;
 }

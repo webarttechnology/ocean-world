@@ -654,6 +654,7 @@ if ( ! class_exists( 'SPF_WPSP_Options' ) ) {
 		public function add_options_html() {
 
 			$has_nav       = ( count( $this->pre_tabs ) > 1 ) ? true : false;
+			$menu_slug     = isset( $this->args['menu_slug'] ) ? $this->args['menu_slug'] : '';
 			$show_buttons  = isset( $this->args['show_buttons'] ) ? $this->args['show_buttons'] : true;
 			$show_all      = ( ! $has_nav ) ? ' spwps-show-all' : '';
 			$ajax_class    = ( $this->args['ajax_save'] ) ? ' spwps-save-ajax' : '';
@@ -686,7 +687,9 @@ if ( ! class_exists( 'SPF_WPSP_Options' ) ) {
 			echo '<div class="spwps-header-inner">';
 
 			echo '<div class="spwps-header-left">';
-			if ( $show_buttons ) {
+			if ( 'wps_replace_layout' === $menu_slug && $show_buttons ) {
+				echo '<h1><img src="' . esc_url( SP_WPS_URL ) . 'Admin/assets/images/replace-icon.svg" alt="">' . wp_kses_post( $this->args['framework_title'] ) . '</h1>';
+			} elseif ( $show_buttons ) {
 				echo '<h1><img src="' . esc_url( SP_WPS_URL ) . 'Admin/assets/images/wps-icon-color.svg" alt="">' . wp_kses_post( $this->args['framework_title'] ) . '</h1>';
 			} else {
 				echo '<h1><img src="' . esc_url( SP_WPS_URL ) . 'Admin/assets/images/import-export.svg" alt="">' . wp_kses_post( $this->args['framework_title'] ) . '</h1>';

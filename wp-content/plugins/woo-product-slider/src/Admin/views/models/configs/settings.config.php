@@ -46,8 +46,8 @@ SPF_WPSP::createSection(
 	$prefix,
 	array(
 		'id'     => 'advanced_settings',
-		'title'  => __( 'Advanced Settings', 'woo-product-slider' ),
-		'icon'   => '<i class="spwps-tab-icon fa fa-cogs"></i>',
+		'title'  => __( 'Advanced', 'woo-product-slider' ),
+		'icon'   => '<i class="spwps-tab-icon fa fa-wrench"></i>',
 		'fields' => array(
 			array(
 				'id'         => 'wpsp_delete_all_data',
@@ -58,38 +58,30 @@ SPF_WPSP::createSection(
 				'default'    => false,
 			),
 			array(
-				'type'    => 'subheading',
-				'content' => __( 'Enqueue/Dequeue CSS', 'woo-product-slider' ),
-			),
-			array(
 				'id'         => 'enqueue_font_awesome',
 				'type'       => 'switcher',
 				'title'      => __( 'FontAwesome CSS', 'woo-product-slider' ),
-				'text_on'    => __( 'Enqueue', 'woo-product-slider' ),
-				'text_off'   => __( 'Dequeue', 'woo-product-slider' ),
-				'text_width' => 95,
+				'text_on'    => __( 'Enqueued', 'woo-product-slider' ),
+				'text_off'   => __( 'Dequeued', 'woo-product-slider' ),
+				'text_width' => 110,
 				'default'    => true,
 			),
 			array(
 				'id'         => 'enqueue_swiper_css',
 				'type'       => 'switcher',
 				'title'      => __( 'Swiper CSS', 'woo-product-slider' ),
-				'text_on'    => __( 'Enqueue', 'woo-product-slider' ),
-				'text_off'   => __( 'Dequeue', 'woo-product-slider' ),
-				'text_width' => 95,
+				'text_on'    => __( 'Enqueued', 'woo-product-slider' ),
+				'text_off'   => __( 'Dequeued', 'woo-product-slider' ),
+				'text_width' => 110,
 				'default'    => true,
-			),
-			array(
-				'type'    => 'subheading',
-				'content' => __( 'Enqueue/Dequeue JS', 'woo-product-slider' ),
 			),
 			array(
 				'id'         => 'enqueue_swiper_js',
 				'type'       => 'switcher',
 				'title'      => __( 'Swiper JS', 'woo-product-slider' ),
-				'text_on'    => __( 'Enqueue', 'woo-product-slider' ),
-				'text_off'   => __( 'Dequeue', 'woo-product-slider' ),
-				'text_width' => 95,
+				'text_on'    => __( 'Enqueued', 'woo-product-slider' ),
+				'text_off'   => __( 'Dequeued', 'woo-product-slider' ),
+				'text_width' => 110,
 				'default'    => true,
 			),
 
@@ -121,19 +113,6 @@ SPF_WPSP::createSection(
 	)
 );
 
-//
-// Replace Layout Section.
-//
-SPF_WPSP::createSection(
-	$prefix,
-	array(
-		'id'    => 'replace_layout_section',
-		'title' => __( 'Replace Layout', 'woo-product-slider' ),
-		'icon'  => '<span class="spwps-tab-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" xmlns:v="https://vecta.io/nano"><path d="M0 69.3V0h69.4v18.6H18.6v50.7H0h0zM100 100H30.6V30.7H100V100z" fill="#444"/></svg></span>',
-		'class' => 'wps-pro-section',
-
-	)
-);
 
 //
 // Responsive Settings section.
@@ -142,7 +121,7 @@ SPF_WPSP::createSection(
 	$prefix,
 	array(
 		'id'    => 'responsive_settings_section',
-		'title' => __( 'Responsive Settings', 'woo-product-slider' ),
+		'title' => __( 'Responsive Breakpoints', 'woo-product-slider' ),
 		'icon'  => '<i class="spwps-tab-icon fa fa-tablet"></i>',
 		'class' => 'wps-pro-section',
 	)
@@ -155,10 +134,9 @@ SPF_WPSP::createSection(
 	$prefix,
 	array(
 		'id'     => 'custom_css_section',
-		'title'  => __( 'Custom CSS', 'woo-product-slider' ),
-		'icon'   => '<i class="spwps-tab-icon fa fa-css3"></i>',
+		'title'  => __( 'Additional CSS', 'woo-product-slider' ),
+		'icon'   => '<i class="spwps-tab-icon fa fa-file-code-o"></i>',
 		'fields' => array(
-
 			array(
 				'id'       => 'custom_css',
 				'type'     => 'code_editor',
@@ -168,6 +146,24 @@ SPF_WPSP::createSection(
 					'theme' => 'dracula',
 					'mode'  => 'css',
 				),
+			),
+
+		),
+	)
+);
+//
+// License key section.
+//
+SPF_WPSP::createSection(
+	$prefix,
+	array(
+		'id'     => 'license_key_section',
+		'title'  => __( 'License Key', 'woo-product-slider' ),
+		'icon'   => '<i class="spwps-tab-icon fa fa-key"></i>',
+		'fields' => array(
+			array(
+				'id'   => 'license_key',
+				'type' => 'license',
 			),
 
 		),

@@ -55,10 +55,10 @@ else
 </section>
  <section class="contact-form-page innerContent">
  <div class="categories-image1">
-        <img src="https://dwstaging.link/cms/ocean-world/wp-content/uploads/2024/01/greenishleaves.png">
+        <img src="<?php echo get_site_url(); ?>/wp-content/uploads/2024/01/greenishleaves.png">
     </div>
     <div class="categories-image2">
-        <img src="https://dwstaging.link/cms/ocean-world/wp-content/uploads/2024/01/fishes.png">
+        <img src="<?php echo get_site_url(); ?>/wp-content/uploads/2024/01/fishes.png">
     </div>
 
  <div class="container">

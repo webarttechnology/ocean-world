@@ -91,17 +91,24 @@ class Helper {
 		if ( $grid_pagination && ( 'slider' !== $layout_preset ) ) {
 			$posts_per_page = $products_per_page;
 		}
-
-		$arg = array(
+		$product_visibility_term_ids = wc_get_product_visibility_term_ids();
+		$arg                         = array(
 			'post_type'      => 'product',
 			'post_status'    => 'publish',
 			'orderby'        => $product_order_by,
 			'order'          => 'DESC',
 			'fields'         => 'ids',
 			'posts_per_page' => $number_of_total_products,
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'product_visibility',
+					'field'    => 'term_taxonomy_id',
+					'terms'    => $product_visibility_term_ids['exclude-from-catalog'],
+					'operator' => 'NOT IN',
+				),
+			),
 		);
 		if ( 'featured_products' === $product_type ) {
-			$product_visibility_term_ids = wc_get_product_visibility_term_ids();
 			$arg['tax_query'][]          = array(
 				'taxonomy' => 'product_visibility',
 				'field'    => 'term_taxonomy_id',
@@ -109,7 +116,6 @@ class Helper {
 			);
 		}
 		if ( $hide_out_of_stock_product ) {
-			$product_visibility_term_ids = wc_get_product_visibility_term_ids();
 			$arg['tax_query'][]          = array(
 				'taxonomy' => 'product_visibility',
 				'field'    => 'term_taxonomy_id',
@@ -181,38 +187,42 @@ class Helper {
 		$carousel_infinite = isset( $shortcode_data['carousel_infinite'] ) && $shortcode_data['carousel_infinite'] ? 'true' : 'false';
 		$rtl_mode          = isset( $shortcode_data['rtl_mode'] ) && $shortcode_data['rtl_mode'] ? 'true' : 'false';
 		$the_rtl           = ( 'true' === $rtl_mode ) ? ' dir="rtl"' : ' dir="ltr"';
-		$navigation_data   = isset( $shortcode_data['navigation_arrow'] ) ? $shortcode_data['navigation_arrow'] : '';
-		switch ( $navigation_data ) {
-			case 'true':
-				$navigation        = 'true';
-				$navigation_mobile = 'true';
-				break;
-			case 'hide_on_mobile':
-				$navigation        = 'true';
-				$navigation_mobile = 'false';
-				break;
-			default:
-				$navigation        = 'false';
-				$navigation_mobile = 'false';
+		// Navigation data.
+		$carousel_navigation = isset( $shortcode_data['wps_carousel_navigation'] ) ? $shortcode_data['wps_carousel_navigation'] : array();
+		$hide_on_mobile      = isset( $carousel_navigation['nav_hide_on_mobile'] ) ? $carousel_navigation['nav_hide_on_mobile'] : false;
+		$navigation_data     = isset( $carousel_navigation['navigation_arrow'] ) ? $carousel_navigation['navigation_arrow'] : true;
+		if ( $navigation_data ) {
+			$navigation        = 'true';
+			$navigation_mobile = 'true';
+		} elseif ( $navigation_data && $hide_on_mobile ) {
+			$navigation        = 'true';
+			$navigation_mobile = 'false';
+		} else {
+			$navigation        = 'false';
+			$navigation_mobile = 'false';
 		}
-		$pagination_data = isset( $shortcode_data['pagination'] ) ? $shortcode_data['pagination'] : '';
-		switch ( $pagination_data ) {
-			case 'true':
-				$pagination        = 'true';
-				$pagination_mobile = 'true';
-				break;
-			case 'hide_on_mobile':
-				$pagination        = 'true';
-				$pagination_mobile = 'false';
-				break;
-			default:
-				$pagination        = 'false';
-				$pagination_mobile = 'false';
+		// Pagination.
+		$carousel_pagination       = isset( $shortcode_data['wps_carousel_pagination'] ) ? $shortcode_data['wps_carousel_pagination'] : array();
+		$pagination_hide_on_mobile = isset( $carousel_pagination['wps_pagination_hide_on_mobile'] ) ? $carousel_pagination['wps_pagination_hide_on_mobile'] : false;
+		$pagination_data           = isset( $carousel_pagination['pagination'] ) ? $carousel_pagination['pagination'] : true;
+		if ( $pagination_data ) {
+			$pagination        = 'true';
+			$pagination_mobile = 'true';
+		} elseif ( $pagination_data && $pagination_hide_on_mobile ) {
+			$pagination        = 'true';
+			$pagination_mobile = 'false';
+		} else {
+			$pagination        = 'false';
+			$pagination_mobile = 'false';
 		}
 
-		$carousel_swipe     = isset( $shortcode_data['carousel_swipe'] ) && $shortcode_data['carousel_swipe'] ? 'true' : 'false';
-		$carousel_draggable = isset( $shortcode_data['carousel_draggable'] ) && $shortcode_data['carousel_draggable'] ? 'true' : 'false';
-		$carousel_free_mode = isset( $shortcode_data['carousel_free_mode'] ) && $shortcode_data['carousel_free_mode'] ? 'true' : 'false';
+		$carousel_swipe       = isset( $shortcode_data['carousel_swipe'] ) && $shortcode_data['carousel_swipe'] ? 'true' : 'false';
+		$carousel_draggable   = isset( $shortcode_data['carousel_draggable'] ) && $shortcode_data['carousel_draggable'] ? 'true' : 'false';
+		$carousel_free_mode   = isset( $shortcode_data['carousel_free_mode'] ) && $shortcode_data['carousel_free_mode'] ? 'true' : 'false';
+		$carousel_mouse_wheel = isset( $shortcode_data['carousel_mouse_wheel'] ) && $shortcode_data['carousel_mouse_wheel'] ? 'true' : 'false';
+		$adaptive_height      = isset( $shortcode_data['carousel_adaptive_height'] ) && $shortcode_data['carousel_adaptive_height'] ? 'true' : 'false';
+		$carousel_tab_key_nav = isset( $shortcode_data['carousel_tab_key_nav'] ) && $shortcode_data['carousel_tab_key_nav'] ? 'true' : 'false';
+		$product_margin       = isset( $shortcode_data['product_margin']['all'] ) ? (int) $shortcode_data['product_margin']['all'] : 20;
 
 		// Display Options.
 		$slider_title              = isset( $shortcode_data['slider_title'] ) ? $shortcode_data['slider_title'] : false;
@@ -239,7 +249,7 @@ class Helper {
 		$class       = 'wpsf-grid-item ';
 		if ( 'slider' === $layout_preset ) {
 			$class       = ' swiper-slide';
-			$slider_data = 'data-swiper=\'{ "pauseOnHover": ' . $pause_on_hover . ', "infinite": ' . $carousel_infinite . ', "slidesToShow": ' . $number_of_column['number1'] . ', "speed": ' . $scroll_speed . ', "autoplay": ' . $auto_play . ', "autoplaySpeed": ' . $auto_play_speed . ', "swipe": ' . $carousel_swipe . ', "draggable": ' . $carousel_draggable . ',"freeMode":' . $carousel_free_mode . ', "slidesPerView":{"lg_desktop":' . $number_of_column['number1'] . ', "desktop":' . $number_of_column['number2'] . ', "tablet":' . $number_of_column['number3'] . ', "mobile":' . $number_of_column['number4'] . '} }\'';
+			$slider_data = 'data-swiper=\'{ "pauseOnHover": ' . $pause_on_hover . ', "infinite": ' . $carousel_infinite . ', "slidesToShow": ' . $number_of_column['number1'] . ', "speed": ' . $scroll_speed . ',"spaceBetween": ' . $product_margin . ', "autoplay": ' . $auto_play . ', "autoplaySpeed": ' . $auto_play_speed . ', "swipe": ' . $carousel_swipe . ', "draggable": ' . $carousel_draggable . ',"freeMode":' . $carousel_free_mode . ',"carousel_accessibility": ' . $carousel_tab_key_nav . ',"mousewheel": ' . $carousel_mouse_wheel . ',"adaptiveHeight": ' . $adaptive_height . ', "slidesPerView":{"lg_desktop":' . $number_of_column['number1'] . ', "desktop":' . $number_of_column['number2'] . ', "tablet":' . $number_of_column['number3'] . ', "mobile":' . $number_of_column['number4'] . '} }\'';
 			wp_enqueue_script( 'sp-wps-swiper-js' );
 		}
 		include self::wps_locate_template( 'carousel.php' );

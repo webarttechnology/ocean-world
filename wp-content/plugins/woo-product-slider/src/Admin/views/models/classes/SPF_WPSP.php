@@ -28,10 +28,11 @@ class SPF_WPSP {
 	public static $premium = true;
 	/**
 	 * Version.
+	 * Framework version 2.2.6.
 	 *
 	 * @var string
 	 */
-	public static $version = '2.2.6';
+	public static $version = '2.7.0';
 	/**
 	 * Dir.
 	 *
@@ -225,6 +226,7 @@ class SPF_WPSP {
 		// Configs.
 		self::include_plugin_file( 'configs/metabox.config.php' );
 		self::include_plugin_file( 'configs/settings.config.php' );
+		self::include_plugin_file( 'configs/replace-layout.config.php' );
 		self::include_plugin_file( 'configs/tools.config.php' );
 		// Setup admin option framework.
 		$params = array();
@@ -421,9 +423,11 @@ class SPF_WPSP {
 				'checkbox',
 				'column',
 				'fieldset',
+				'license',
 				'spinner',
 				'spacing',
 				'switcher',
+				'slider',
 				'subheading',
 				'submessage',
 				'color_group',
@@ -435,6 +439,7 @@ class SPF_WPSP {
 				'text',
 				'image_sizes',
 				'dimensions',
+				'tabbed',
 				'typography',
 				'code_editor',
 				'custom_import',
@@ -680,8 +685,10 @@ class SPF_WPSP {
 			}
 
 			if ( ! empty( $field['title'] ) ) {
+				$title_info = ( ! empty( $field['title_info'] ) ) ? '<span class="spwps-help title-info"><div class="spwps-help-text">' . wp_kses_post( $field['title_info'] ) . '</div><span class="tooltip-icon"><img src="' . self::include_plugin_url( 'assets/images/info.svg' ) . '"></span></span>' : '';
+
 				echo '<div class="spwps-title">';
-				echo '<h4>' . wp_kses_post( $field['title'] ) . '</h4>';
+				echo '<h4>' . wp_kses_post( $field['title'] . $title_info ) . '</h4>';
 				echo ( ! empty( $field['subtitle'] ) ) ? '<div class="spwps-subtitle-text">' . wp_kses_post( $field['subtitle'] ) . '</div>' : '';
 				echo '</div>';
 			}

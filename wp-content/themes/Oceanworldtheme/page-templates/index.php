@@ -189,12 +189,14 @@ $form1='';
                                ),
                               'posts_per_page'=>6,
                               'post_status'=>'publish',
-                              'order' => 'ASC'
+                              'order' => 'DESC'
                               )
                               
                               );  
 
                           while($metaqueries->have_posts()):$metaqueries->the_post();
+
+                            
                             $rating = get_field('product_rate',get_the_ID());
                     $rateloopcount = 0;
                     $ratebalance = 5-$rating;

@@ -36,9 +36,13 @@
 		if ( 'grid' === $layout_preset ) {
 			require self::wps_locate_template( 'pagination.php' );
 		}
+		if ( 'slider' === $layout_preset ) {
+			?>
+			</div> <!-- end swiper-wrapper tag  -->
+			<?php
+		}
 		?>
 		<?php if ( 'slider' === $layout_preset && 'true' === $navigation ) : ?>
-				</div> 
 		<!-- next / prev arrows -->
 			<div class="wpsp-nav swiper-button-next"><i class="fa fa-angle-right"></i></div>
 			<div class="wpsp-nav swiper-button-prev"><i class="fa fa-angle-left"></i></div>

@@ -103,7 +103,7 @@ if ( ! class_exists( 'SPF_WPSP_Field_border' ) ) {
 
 				$placeholder = ( ! empty( $args['all_placeholder'] ) ) ? $args['all_placeholder'] : '';
 				echo '<div class="spwps--border">';
-				echo '<div class="spwps--title">Thickness</div>';
+				echo '<div class="spwps--title">' . esc_html__( 'Width', 'woo-product-slider' ) . '</div>';
 				echo '<div class="spwps--input">';
 				echo ( ! empty( $args['all_icon'] ) ) ? '<span class="spwps--label spwps--icon">' . wp_kses_post( $args['all_icon'] ) . '</span>' : '';
 				echo '<input type="number" name="' . esc_attr( $this->field_name( '[all]' ) ) . '" value="' . esc_attr( $value['all'] ) . '" placeholder="' . esc_attr( $placeholder ) . '" class="spwps-input-number spwps--is-unit spwps-number" step="any" />';
@@ -134,7 +134,7 @@ if ( ! class_exists( 'SPF_WPSP_Field_border' ) ) {
 
 			if ( ! empty( $args['style'] ) ) {
 				echo '<div class="spwps--style">';
-				echo '<div class="spwps--title">Style</div>';
+				echo '<div class="spwps--title">' . esc_html__( 'Style', 'woo-product-slider' ) . '</div>';
 				echo '<div class="spwps--input">';
 				echo '<select name="' . esc_attr( $this->field_name( '[style]' ) ) . '">';
 				foreach ( $border_props as $border_prop_key => $border_prop_value ) {
@@ -152,7 +152,7 @@ if ( ! class_exists( 'SPF_WPSP_Field_border' ) ) {
 				$default_color_attr = ( ! empty( $default_value['color'] ) ) ? $default_value['color'] : '';
 				echo '<div class="spwps--color">';
 				echo '<div class="spwps-field-color">';
-				echo '<div class="spwps--title">Color</div>';
+				echo '<div class="spwps--title">' . esc_html__( 'Color', 'woo-product-slider' ) . '</div>';
 				echo '<input type="text" name="' . esc_attr( $this->field_name( '[color]' ) ) . '" value="' . esc_attr( $value['color'] ) . '" class="spwps-color" data-default-color="' . esc_attr( $default_color_attr ) . '" />';
 				echo '</div>';
 				echo '</div>';
@@ -161,7 +161,7 @@ if ( ! class_exists( 'SPF_WPSP_Field_border' ) ) {
 				$default_hover_color_attr = ( ! empty( $default_value['hover_color'] ) ) ? $default_value['hover_color'] : '';
 				echo '<div class="spwps--color">';
 				echo '<div class="spwps-field-color">';
-				echo '<div class="spwps--title">Hover Color</div>';
+				echo '<div class="spwps--title">' . esc_html__( 'Hover Color', 'woo-product-slider' ) . '</div>';
 				echo '<input type="text" name="' . esc_attr( $this->field_name( '[hover_color]' ) ) . '" value="' . esc_attr( $value['hover_color'] ) . '" class="spwps-color" data-default-color="' . esc_attr( $default_hover_color_attr ) . '" />';
 				echo '</div>';
 				echo '</div>';

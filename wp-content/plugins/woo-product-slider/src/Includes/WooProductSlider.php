@@ -156,7 +156,7 @@ class WooProductSlider {
 
 			array_unshift( $links, $new_links );
 
-			$links['go_pro'] = sprintf( '<a target="_blank" href="%1$s" style="color: #35b747; font-weight: 700;">Go Pro!</a>', 'https://shapedplugin.com/woocommerce-product-slider/pricing/?ref=1' );
+			$links['go_pro'] = sprintf( '<a target="_blank" href="%1$s" style="color: #35b747; font-weight: 700;">Go Pro!</a>', 'https://wooproductslider.io/pricing/?ref=1' );
 		}
 
 		return $links;
@@ -174,7 +174,7 @@ class WooProductSlider {
 	 */
 	public function after_woo_product_slider_row_meta( $plugin_meta, $file ) {
 		if ( SP_WPS_BASENAME === $file ) {
-			$plugin_meta[] = '<a href="https://shapedplugin.com/woocommerce-product-slider/lite-version-demo/" target="_blank">' . __( 'Live Demo', 'woo-product-slider' ) . '</a>';
+			$plugin_meta[] = '<a href="https://wooproductslider.io/lite-version-demo/" target="_blank">' . __( 'Live Demo', 'woo-product-slider' ) . '</a>';
 		}
 
 		return $plugin_meta;
