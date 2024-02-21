@@ -52,16 +52,21 @@ while(have_posts()):the_post();
             <div class="eventBox d-flex mb-3">
                 <div class="dates">
                     <div class="datePart text-center">
-                        <small><?php echo trim($monthname); ?></small>
-                        <h2><?php echo trim($dayofthemonth); ?></h2>
-                        <small class="years"><?php echo trim($yearpart); ?></small>
+                        <!--<small><?php //echo trim($monthname); ?></small>
+                        <h2><?php //echo trim($dayofthemonth); ?></h2>
+                        <small class="years"><?php //echo trim($yearpart); ?></small> -->
+
+                         <small><?php echo get_field('month',get_the_ID()); ?></small>
+                        <h2><?php echo get_field('event_date_range',get_the_ID()); ?></h2>
+                        <small class="years"><?php echo get_field('year',get_the_ID()); ?></small> 
+
                     </div>
                 </div>
                 <div class="event_details text-left">
                     <small><?php echo get_field('booth_number',get_the_ID()); ?></small>
                    <a href="<?php the_permalink(); ?>"> <h3><?php the_title(); ?></h3></a>
-                    <p><?php echo get_field('event_address',get_the_ID()); ?></p>
-                    <p><?php echo  $finalloopcontent; ?></p>
+                    <h4><?php echo get_field('event_address',get_the_ID()); ?></h4>
+                    <h4><?php echo  $finalloopcontent; ?></h4>
                 </div>
                 <?php if(get_the_post_thumbnail_url(get_the_ID())){ ?>
                 <div class="event_pic"><img src="<?php echo get_the_post_thumbnail_url(get_the_ID());  ?>" class="img-fluid"></div>

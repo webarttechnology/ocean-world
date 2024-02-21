@@ -1,0 +1,16 @@
+2024-02-16T07:28:28+00:00 CRITICAL Uncaught Error: Object of class WP_Error could not be converted to string in /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-content/themes/Oceanworldtheme/page-templates/index.php:276
+Stack trace:
+#0 /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-includes/template-loader.php(106): include()
+#1 /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-blog-header.php(19): require_once('/home/u78107848...')
+#2 /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/index.php(17): require('/home/u78107848...')
+#3 {main}
+  thrown in /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-content/themes/Oceanworldtheme/page-templates/index.php on line 276
+
+2024-02-16T08:52:59+00:00 CRITICAL Uncaught Error: Object of class WP_Error could not be converted to string in /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-content/themes/Oceanworldtheme/page-templates/index.php:276
+Stack trace:
+#0 /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-includes/template-loader.php(106): include()
+#1 /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-blog-header.php(19): require_once('/home/u78107848...')
+#2 /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/index.php(17): require('/home/u78107848...')
+#3 {main}
+  thrown in /home/u781078481/domains/dwstaging.link/public_html/cms/ocean-world/wp-content/themes/Oceanworldtheme/page-templates/index.php on line 276
+

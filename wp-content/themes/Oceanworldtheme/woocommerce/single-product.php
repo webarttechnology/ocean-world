@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'shop' ); 
+get_header(); 
  if(get_field('inner_banner')!=''){
 ?>
 <section class="banner-part innerbanner" style="background-image:url(<?php the_field('inner_banner'); ?>);">
@@ -92,6 +92,6 @@ else
 </div>
 </section>
 <?php
-get_footer( 'shop' );
+get_footer();
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

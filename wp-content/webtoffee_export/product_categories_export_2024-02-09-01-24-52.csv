@@ -1,0 +1,8 @@
+﻿term_id,name,slug,description,display_type,parent,thumbnail
+15,Uncategorized,uncategorized,,default,0,
+18,Figurines,figurines,,default,0,http://localhost/Oceanworld/wp-content/uploads/2024/01/categories1.png
+19,Magnets,magnets,,default,0,http://localhost/Oceanworld/wp-content/uploads/2024/01/categories2.png
+21,"Animals magnets",animals-magnets,,default,19,http://localhost/Oceanworld/wp-content/uploads/2024/01/categories2.png
+22,Orca's,orcas,,default,18,http://localhost/Oceanworld/wp-content/uploads/2024/01/AG102.jpg
+23,Dolphins,dolphins,,default,18,http://localhost/Oceanworld/wp-content/uploads/2024/01/DOPHIN_category.jpg
+24,"Animals on springs",animals-on-springs,,default,0,http://localhost/Oceanworld/wp-content/uploads/2024/01/CR101_1.jpg

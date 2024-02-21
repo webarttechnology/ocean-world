@@ -58,15 +58,16 @@ $form1='';
              ?>
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <?php foreach($productcategories as $eachproductcat ){ 
+                        <?php foreach($productcategories as $eachproductcat )
+                        { 
                             $catcounter++;
 
                             if($eachproductcat->name=='Uncategorized')
                             {
                                 continue;
                             }
-                            if($catcounter > 4)
-                                {break;}
+                            if($catcounter > 6)
+                                {break;} 
 
                                 $thumbnail_id = get_term_meta( $eachproductcat->term_id, 'thumbnail_id', true );
                                 // get the medium-sized image url
@@ -84,14 +85,13 @@ $form1='';
                             </div>
                         </div>
                     <?php } ?>
-                     
-
+                
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
-        <!-- <span class="view"><a href="#">View All</a> </span> -->
+         <div class="view"><a href="<?php echo get_site_url(); ?>/shop">View All</a> </div> 
         <div class="image3">
             <img src="<?php echo get_field('bush_image',$pageid); ?>">
         </div>
@@ -155,7 +155,8 @@ $form1='';
         </ul>
 
         <div class="tab-content" id="pills-tabContent">
-           <?php   foreach($prodsubcatarray as $eachprodsubcatid){
+           <?php   foreach($prodsubcatarray as $eachprodsubcatid)
+           {
             $tabcount2++;
             $term_object = get_term( $eachprodsubcatid );
          if( $tabcount2==1)
@@ -225,28 +226,28 @@ $form1='';
 
                                      ?>
 
-                                    <ul class="test-star-icon d-flex">
-                                    <?php for($i=1;$i<=$rating;$i++)
-                                    { ?>
+                                  <!--  <ul class="test-star-icon d-flex">
+                                    <?php //for($i=1;$i<=$rating;$i++)
+                                   // { ?>
                                        <li><a href="#"><i class="bi bi-star-fill"></i></a></li>
                                     <?php 
-                                    }
-                                    if($ratebalance>0)
-                                    {
-                                    for($j=1;$j<=$ratebalance;$j++){
+                                  //  }
+                                    //if($ratebalance>0)
+                                 //   {
+                                    //for($j=1;$j<=$ratebalance;$j++){
                                     ?>
                                           <li><a href="#"><i class="bi bi-star"></i></a></li>
                                     <?php 
-                                    }
-                                    }
+                                    //}
+                                  //  }
 
 
                                     ?>
                    
                           
-                                   </ul>
+                                   </ul> -->
 
-                                   <div class="wishlist btn btn-warning"><?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.get_the_ID().']'); ?></div>
+                     <div class="wishlist btn btn-warning"><?php echo do_shortcode('[yith_wcwl_add_to_wishlist product_id='.get_the_ID().']'); ?></div>
 
                                    <?php if(is_user_logged_in())
                                    { ?>
@@ -324,15 +325,16 @@ $form1='';
         <div class="row gallery-part">
             <div class="col-12">
                 <h2 class="text-center mb-4 headings"><?php the_field('gallery_start_heading'); ?></h2>
-                <div class="grid">
-                      <?php  $allgalimg = new WP_Query(array('post_type'=>'ourgallery','post_status'=>'publish','posts_per_page'=>6));
-                while($allgalimg->have_posts()):$allgalimg->the_post();
+               <!-- <div class="grid">
+                      <?php  //$allgalimg = new WP_Query(array('post_type'=>'ourgallery','post_status'=>'publish','posts_per_page'=>6));
+                //while($allgalimg->have_posts()):$allgalimg->the_post();
 
              ?>
-                    <div class="grid-item"> <img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>" class="w-100"/></div>
+                    <div class="grid-item"> <img src="<?php //echo get_the_post_thumbnail_url(get_the_ID()); ?>" class="w-100"/></div>
                    
-                <?php endwhile;wp_reset_query(); ?>
-                </div>
+                <?php //endwhile;wp_reset_query(); ?>
+                </div> -->
+                <?php echo do_shortcode('[Best_Wordpress_Gallery id="2" gal_title="All images"]'); ?>
             </div>
             
         </div>

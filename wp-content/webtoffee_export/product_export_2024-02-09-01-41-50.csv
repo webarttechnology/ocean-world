@@ -1,0 +1,40 @@
+﻿post_title,post_name,post_parent,ID,post_content,post_excerpt,post_status,post_password,menu_order,post_date,post_author,comment_status,sku,parent_sku,children,downloadable,virtual,stock,regular_price,sale_price,weight,length,width,height,tax_class,visibility,stock_status,backorders,sold_individually,low_stock_amount,manage_stock,tax_status,upsell_ids,crosssell_ids,purchase_note,sale_price_dates_from,sale_price_dates_to,download_limit,download_expiry,product_url,button_text,images,downloadable_files,product_page_url,meta:total_sales,tax:product_type,tax:product_visibility,tax:product_cat,tax:product_tag,tax:product_shipping_class
+AG101,ag101,,155,"This os AG101",,publish,,0,"2024-01-10 04:51:09",1,open,,,,no,no,,100,,,,,,,,instock,no,no,,no,taxable,,,,,,'-1,'-1,,,"http://localhost/Oceanworld/wp-content/uploads/2024/01/AG101.jpg ! alt :  ! title : AG101 ! desc :  ! caption : ",,http://localhost/Oceanworld/product/ag101/,0,simple,,"Magnets > Animals magnets",,
+AG102,ag102,,157,"this AG102",,publish,,0,"2024-01-10 04:54:20",1,open,,,,no,no,,200,,,,,,,,instock,no,no,,no,taxable,,,,,,'-1,'-1,,,"http://localhost/Oceanworld/wp-content/uploads/2024/01/AG102.jpg ! alt :  ! title : AG102 ! desc :  ! caption : ",,http://localhost/Oceanworld/product/ag102/,0,simple,,"Magnets > Animals magnets",,
+OC307,oc307,,159,"This is animal magnet 1",,publish,,0,"2024-01-10 04:58:24",1,open,,,,no,no,,300,,,,,,,,instock,no,no,,no,taxable,,,,,,'-1,'-1,,,"http://localhost/Oceanworld/wp-content/uploads/2024/01/animalMagnet1.png ! alt :  ! title : animalMagnet1 ! desc :  ! caption : ",,http://localhost/Oceanworld/product/oc307/,1,simple,,"Figurines > Orca's",,
+OC308,oc308,,161,"this os OC308",,publish,,0,"2024-01-10 04:59:28",1,open,,,,no,no,,400,,,,,,,,instock,no,no,,no,taxable,,,,,,'-1,'-1,,,"http://localhost/Oceanworld/wp-content/uploads/2024/01/animalMagnet2.jpg ! alt :  ! title : animalMagnet2 ! desc :  ! caption : ",,http://localhost/Oceanworld/product/oc308/,0,simple,,"Figurines > Orca's",,
+DL101,dl101,,275,"1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu libero consectetur, molestie ligula interdum, viverra turpis. Fusce quis rutrum augue. Curabitur eu justo sit amet augue porta tristique. Aenean in elit quis ante vulputate blandit vitae et nisl. Duis imperdiet ut arcu eu accumsan. Nulla eu consectetur nisi. Aenean rhoncus, sapien id malesuada pretium, tortor erat facilisis sem, vel posuere tellus enim vel ex. Integer imperdiet ultricies sollicitudin. Quisque posuere pulvinar imperdiet. Praesent vehicula turpis sed elit placerat, a pulvinar nunc eleifend. Aliquam vitae purus ac purus semper dictum et id velit.
+<ul>
+ 	<li>Nulla eu consectetur nisi</li>
+ 	<li>Integer imperdiet ultricies sollicitudin</li>
+ 	<li>Nulla eu consectetur nisi</li>
+ 	<li>Integer imperdiet ultricies sollicitudin</li>
+</ul>","<table border=""2"">
+<tbody>
+<tr>
+<td style=""text-align: center;""><strong>Name</strong></td>
+<td style=""text-align: center;"">DL101</td>
+</tr>
+<tr>
+<td style=""text-align: center;""><strong>SKU</strong></td>
+<td style=""text-align: center;"">dl101sku</td>
+</tr>
+<tr>
+<td style=""text-align: center;""><strong>Minnimum Order</strong></td>
+<td style=""text-align: center;"">Pack of 6</td>
+</tr>
+<tr>
+<td style=""text-align: center;""><strong>Case Pack</strong></td>
+<td style=""text-align: center;"">3.5″</td>
+</tr>
+<tr>
+<td style=""text-align: center;""><strong>Inner</strong></td>
+<td style=""text-align: center;"">3.5″</td>
+</tr>
+<tr>
+<td style=""text-align: center;""><strong>Dimension"" <span class=""proddimm"">(L / W / H)</span></strong></td>
+<td style=""text-align: center;"">5/4/5</td>
+</tr>
+</tbody>
+</table>",publish,,0,"2024-01-11 13:56:01",1,closed,dl101sku,,,no,no,,200,,,,,,,,instock,no,no,,no,taxable,159|161,,,,,'-1,'-1,,,"http://localhost/Oceanworld/wp-content/uploads/2024/01/DOPHIN_category.jpg ! alt :  ! title : DOPHIN_category ! desc :  ! caption : ",,http://localhost/Oceanworld/product/dl101/,1,simple,,"Figurines > Dolphins",,
+CR101,cr101,,297,,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam et enim at dui aliquet elementum. Vestibulum sit amet lacinia velit. Ut eu pellentesque mauris. Integer ut lectus rutrum, ornare libero sed, porta augue. Etiam magna tellus, volutpat et est eu, suscipit sagittis mi. Fusce eget ipsum rhoncus, consectetur elit feugiat, ultricies orci. Aliquam posuere lacus quis augue pretium pellentesque. Integer ut erat consectetur, ultricies mauris elementum, finibus enim. Aenean feugiat, enim in rutrum interdum, est nulla placerat arcu, eu egestas arcu ipsum a ante. Aenean interdum pretium elit.",publish,,0,"2024-01-16 12:19:37",1,closed,,,,no,no,,100,,,,,,,,instock,no,no,,no,taxable,,,,,,'-1,'-1,,,"http://localhost/Oceanworld/wp-content/uploads/2024/01/CR101_1.jpg ! alt :  ! title : CR101_1 ! desc :  ! caption :  | http://localhost/Oceanworld/wp-content/uploads/2024/01/DOPHIN_category.jpg ! alt :  ! title : DOPHIN_category ! desc :  ! caption :  | http://localhost/Oceanworld/wp-content/uploads/2024/01/categories2.png ! alt :  ! title : categories2 ! desc :  ! caption : ",,http://localhost/Oceanworld/product/cr101/,2,simple,,"Animals on springs",,

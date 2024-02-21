@@ -209,8 +209,8 @@ color: #000;
     padding: 283px 0;
     position: relative;
     top: -291px;
- 
     padding-top: 27rem;
+    padding-bottom: 390px;
     text-align: center;
     overflow: hidden;
 }
@@ -222,6 +222,9 @@ padding-bottom: 2rem;
 .categories-box span img{
     width: 150px;
     object-fit: cover;
+}
+.page-template-index .categories-box span img {
+    width: 250px;
 }
 /* .categories-box {
     background: #fff;
@@ -891,13 +894,32 @@ footer p {margin:40px 0;}
     background-color: #f97512;
     border-color: #f97512;
 }
-.datePart {background: antiquewhite; padding: 10px 10px 20px; color: #333; position: relative;}
-.datePart h2 {
-    font-size: 48px;
-    margin: 0;
-    line-height: 1;
+.dates {
+    width: 113px;
+    flex: 0 0 130px;
 }
-.years {background: #333; padding:0; color: #fff; position: absolute; bottom: 0; left: 0; display: block; width: 100%;}
+.datePart {
+    background: antiquewhite;
+    padding: 10px 10px 20px;
+    color: #333;
+    position: relative;
+}
+.datePart h2 {
+    font-size: 36px;
+    margin: 0;
+    line-height: 1.5;
+}
+.years {
+    background: #333;
+    padding: 0;
+    color: #fff;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    display: block;
+    width: 100%;
+    font-size: 19px;
+}
 .event_details {
     background: #fff;
     padding: 15px 30px;
@@ -1084,7 +1106,7 @@ position: relative;
   
 
 /* gallery animation slider */
-.animate-slider .swiper-slide img {border-radius: 30px;}
+.animate-slider .swiper-slide img {border-radius: 30px;width:100%;height:300px;object-fit:cover;}
 .animate-slider .swiper {margin: 50px 0 150px;}
 .animate-slider .swiper-slide::before {position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); content: "";border-radius: 30px;}
 
@@ -1252,6 +1274,13 @@ position: relative;
 }
 .gallery-part h2 br {display: none;}
 .product_pic {display: flex; height: 200px; justify-content: center; align-items: center;}
+.page-template-index .product_pic {
+    height: auto;
+}
+.page-template-index .product_pic img {
+    height: 200px;
+    object-fit: contain;
+}
 .yith-wcwl-add-to-wishlist {
     margin: 0 0 0.5rem!important;color: #000 !important;
 }
@@ -1786,11 +1815,12 @@ button.woocommerce-Button , .woocommerce-address-fields .button , .wc-block-comp
 	display: block;
 }
 .innerContent .accordion .accordion-item .onlyparentcatt {
-	padding: 10px 15px;
+    padding: 10px 15px;
     font-weight: bold;
     border: 0;
     font-size: 16px;
     color: #333333;
+    background: transparent;
 }
 .innerContent .accordion .accordion-item .accordion-header {
 	text-align: left;
@@ -1977,3 +2007,17 @@ table, th, td {
 .proddimm{
 font-size:14px;
 }
+.thisisactive .accordion-header:not(.collapsed){
+	background:#f97512;
+}
+.thisisactive .accordion-header .onlyparentcatt:not(.collapsed){
+	background:#f97512;
+	color:#fff ;
+}
+.thisisactive{
+	color:#f97512;
+}
+.home .gallery{
+    padding-bottom: 313px;
+}
+

@@ -22,8 +22,17 @@ get_header( 'shop' );
 if( is_product_category() ) {
 
  $cate = get_queried_object();
+ //echo '<pre>'; print_r($cate); echo '</pre>'; 
+
   $cateslg = $cate->slug;
+  $parentid = $cate->parent;
+
+
+
+
 }
+
+
 if(get_field('inner_banner'))
 {
 ?>
@@ -197,30 +206,84 @@ else
                         'parent'    => $eachprodcatobj->term_id,
                         'hide_empty' => false
                       ) );
-                       if($children){
+                       if($children)
+                       {
                        
                      ?>
                     
                     <div class="accordion-item">
+                        <?php if($eachprodcatobj->term_id ==$parentid)
+                        { ?>
                         <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-<?php echo $eachprodcatobj->slug; ?>">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq-<?php echo $eachprodcatobj->slug; ?>">
                             <?php echo $eachprodcatobj->name; ?>
                             </button>
                         </h2>
-                        <div id="faq-<?php echo $eachprodcatobj->slug; ?>" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                    <?php }
+                    else
+                    {
+                        ?>
+                        <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-<?php echo $eachprodcatobj->slug; ?>">
+                            <?php echo $eachprodcatobj->name; ?>
+                            </button>
+                        </h2>
+
+
+                        <?php 
+                    }
+
+
+     if($eachprodcatobj->term_id ==$parentid)
+                      {
+
+                     ?>
+
+
+                        <div id="faq-<?php echo $eachprodcatobj->slug; ?>" class="accordion-collapse collapse show" data-bs-parent="#faqlist">
+
+                        <?php 
+                       }
+                        else
+                        {
+                            ?>
+                               <div id="faq-<?php echo $eachprodcatobj->slug; ?>" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                            <?php 
+                        }
+
+                         ?>
+
                             <div class="accordion-body">
                             <ul>
                                 <?php foreach($children as $eachchild)
                                 {
+                                    if($cateslg==$eachchild->slug)
+                                    {
                                     
                                  ?>
-                                <li>
+                                <li class="thisisactive">
                                     <div class="form-check">
                                        <!-- <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"> -->
                                        <a href="<?php echo get_term_link($eachchild->slug, 'product_cat'); ?>"><?php echo $eachchild->name .' ('.$eachchild->count.')'; ?> </a>
                                     </div>
                                 </li>
-                            <?php } ?>
+                            <?php }
+
+                                else
+                                {
+                                    ?>
+                                    <li>
+                                        <div class="form-check">
+                                           <!-- <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"> -->
+                                           <a href="<?php echo get_term_link($eachchild->slug, 'product_cat'); ?>"><?php echo $eachchild->name .' ('.$eachchild->count.')'; ?> </a>
+                                        </div>
+                                    </li>
+
+                                    <?php 
+                                }
+
+                            }
+                             ?>
                            
                             </ul>
                             </div>
@@ -229,9 +292,11 @@ else
                 <?php }
                 else
                 {
+                    if($cateslg==$eachprodcatobj->slug)
+                    {
                     ?>
 
-                 <div class="accordion-item">
+                 <div class="accordion-item thisisactive">
                         <h2 class="accordion-header">
       <button class="onlyparentcatt"  type="button"  onclick="location.href='<?php echo get_term_link($eachprodcatobj->slug, 'product_cat'); ?>'">
                             
@@ -240,6 +305,22 @@ else
                         </h2>
                     </div>
                     <?php 
+                   }
+                   else
+                   {
+                    ?>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+      <button class="onlyparentcatt"  type="button"  onclick="location.href='<?php echo get_term_link($eachprodcatobj->slug, 'product_cat'); ?>'">
+                            
+                            <?php echo $eachprodcatobj->name .' ('.$eachprodcatobj->count.')'; ?>
+                            </button>
+                        </h2>
+                    </div>
+
+
+                  <?php 
+                   }
 
                 }
 

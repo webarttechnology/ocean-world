@@ -47,7 +47,12 @@ while(have_posts()):the_post();
               <div class="col-md-12 text-left">
                 <ul>
                     <li><h3>Title : <?php the_title(); ?></h3></li>
-                    <li><h3>Date : <?php echo get_the_date(); ?></h3></li>
+                   <!-- <li><h3>Date : <?php echo get_the_date(); ?></h3></li> -->
+
+ 
+ <li><h3>Date Range : <?php echo get_field('event_date_range',get_the_ID()); ?></h3></li>
+ <li><h3>Month : <?php echo get_field('month',get_the_ID()); ?></h3></li>
+ <li><h3>Year : <?php echo get_field('year',get_the_ID()); ?></h3></li>
                     <li><h3>Location : <?php echo get_field('event_address',get_the_ID()); ?></h3></li>
                     <li><h3>Room/booth no : <?php echo get_field('booth_number',get_the_ID()); ?></h3></li>
                 </ul>
